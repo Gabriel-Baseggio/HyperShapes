@@ -9,7 +9,6 @@ public class HyperShapes extends Game {
     public static HyperShapes INSTANCE;
     private int screenWidth, screenHeight;
     private OrthographicCamera camera;
-
     public HyperShapes() {
         INSTANCE = this;
     }
