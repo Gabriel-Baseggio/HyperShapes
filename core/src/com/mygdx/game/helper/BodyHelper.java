@@ -33,6 +33,29 @@ public class BodyHelper {
         return body;
     }
 
+    public static Body createSensorBox(float x, float y, float width, float height, World world, ContactType type) {
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.KinematicBody;
+        bodyDef.fixedRotation = true;
+        bodyDef.position.set(new Vector2(x / PPM, y / PPM));
+        Body body = world.createBody(bodyDef);
+
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(width / 2 / PPM, height / 2 / PPM);
+
+        FixtureDef fixSensor = new FixtureDef();
+        fixSensor.shape = shape;
+        fixSensor.isSensor = true;
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.shape = shape;
+
+        body.createFixture(fixtureDef);
+        body.createFixture(fixSensor).setUserData(type);
+
+        shape.dispose();
+        return body;
+    }
+
     public static Body createCircle(float x, float y, float diameter, boolean isStatic, float density, World world, ContactType type, FixtureDef fixSensor) {
         BodyDef bodyDef = new BodyDef();
         if (isStatic) {

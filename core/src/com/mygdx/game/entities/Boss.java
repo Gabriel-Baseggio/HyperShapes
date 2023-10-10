@@ -54,12 +54,12 @@ public class Boss {
     public void update(float deltaTime) {
         time += deltaTime;
 
-        if (stage == 1 && time >= 2 && !alreadySpawned) {
-            BossProjectile.spawnInCircle(x, y, 10, 0, diameter / 2, "patinho.png", gameScreen);
+        if (stage == 1 && time >= 0.5 && !alreadySpawned) {
+            BossProjectile.spawnInCircle(x, y, 16, 0, diameter / 2, "patinho.png", gameScreen);
             alreadySpawned = true;
         }
-        if (stage == 1 && time >= 4 && alreadySpawned) {
-            BossProjectile.spawnInCircle(x, y, 10, 360/20, diameter / 2, "patinho.png", gameScreen);
+        if (stage == 1 && time >= 1 && alreadySpawned) {
+            BossProjectile.spawnInCircle(x, y, 16, 360/32, diameter / 2, "patinho.png", gameScreen);
             time = 0;
             alreadySpawned = false;
         }

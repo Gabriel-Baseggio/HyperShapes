@@ -26,7 +26,7 @@ public class BossProjectile {
         this.angX = angX;
         this.angY = angY;
         this.gameScreen = gameScreen;
-        this.speed = 100;
+        this.speed = 800;
         this.diameter = diameter;
         this.texture = new Texture(texture);
         this.body = createCircle(x, y, diameter, false, 10000, gameScreen.getWorld(), BOSSPROJECTILE, null);
