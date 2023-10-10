@@ -16,6 +16,7 @@ import com.mygdx.game.helper.GameContactListener;
 import com.mygdx.game.helper.TimeHelper;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 
 import static com.mygdx.game.helper.Constants.PPM;
@@ -34,6 +35,7 @@ public class GameScreen extends ScreenAdapter {
 
     private Boss boss;
     private ArrayList<BossProjectile> bossProjectiles;
+    private ArrayList<BossBar> bossBars;
 
     private Wall wallTop, wallRight, wallBottom, wallLeft;
 
@@ -53,7 +55,7 @@ public class GameScreen extends ScreenAdapter {
         this.gameContactListener = new GameContactListener(this);
         this.world.setContactListener(this.gameContactListener);
 
-        this.player = new Player(HyperShapes.INSTANCE.getScreenWidth() / 2, HyperShapes.INSTANCE.getScreenHeight() / 2 - 200, 48, 48, "patinho.png", this);
+        this.player = new Player(HyperShapes.INSTANCE.getScreenWidth() / 2 - 300, HyperShapes.INSTANCE.getScreenHeight() / 2 - 200, 48, 48, "patinho.png", this);
         this.playerProjectile = new PlayerProjectile(HyperShapes.INSTANCE.getScreenWidth() / 2 + 100, HyperShapes.INSTANCE.getScreenHeight() / 2 - 200, 28, "SaboneteRosa.png", this);
 
         this.slowEffect = false;
@@ -66,6 +68,7 @@ public class GameScreen extends ScreenAdapter {
 
         this.boss = new Boss(HyperShapes.INSTANCE.getScreenWidth() / 2, HyperShapes.INSTANCE.getScreenHeight() / 2, 192, "PrimeiroBoss.png", this);
         this.bossProjectiles = new ArrayList<BossProjectile>();
+        this.bossBars = new ArrayList<BossBar>();
 
         this.shapeRenderer = new ShapeRenderer();
 
@@ -83,6 +86,8 @@ public class GameScreen extends ScreenAdapter {
         world.step(1 / 60f, 6, 2);
 
         this.camera.update();
+
+        this.boss.setStage(2);
 
         if (slowEffect && playerProjectile.getCanShoot()) {
             timeHelper.setTimeScale(0.1f);
@@ -105,8 +110,23 @@ public class GameScreen extends ScreenAdapter {
             }
         }
 
-        if (this.player.getScore() == 5) {
+        Iterator<BossBar> iterator2 = bossBars.iterator();
+        while (iterator2.hasNext()) {
+            BossBar bossBar = iterator2.next();
+            bossBar.update(timeHelper.getDeltaTime());
+            if (bossBar.destroy()) {
+                world.destroyBody(bossBar.getBody());
+                iterator2.remove();
+            }
+        }
+
+        if (this.player.getScore() == 1) {
+            spawnBars((int) Math.round(HyperShapes.INSTANCE.getScreenWidth() * 0.6), (int) Math.round(HyperShapes.INSTANCE.getScreenWidth() * 0.4));
+            for (BossBar bossBar: bossBars) {
+                System.out.println("BossBar ok: " + bossBar.getBody().getPosition().x);
+            }
             this.boss.setStage(2);
+            this.player.score();
         }
 
         batch.setProjectionMatrix(camera.combined);
@@ -141,11 +161,14 @@ public class GameScreen extends ScreenAdapter {
 
         batch.end();
 
-
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
         for (BossProjectile bossProjectile : bossProjectiles) {
             bossProjectile.render(shapeRenderer);
+        }
+
+        for (BossBar bossBar : bossBars) {
+            bossBar.render(shapeRenderer);
         }
 
         this.playerProjectile.renderLine(shapeRenderer);
@@ -172,10 +195,6 @@ public class GameScreen extends ScreenAdapter {
         return playerProjectile;
     }
 
-    public Camera getCamera() {
-        return camera;
-    }
-
     public Boss getBoss() {
         return boss;
     }
@@ -191,4 +210,12 @@ public class GameScreen extends ScreenAdapter {
     public TimeHelper getTimeHelper() {
         return timeHelper;
     }
+
+    public void spawnBars(int w1, int w2) {
+        BossBar bossBar = new BossBar(w1/2, HyperShapes.INSTANCE.getScreenHeight() - 40, -1, w1, 80, this);
+        BossBar bossBar1 = new BossBar(HyperShapes.INSTANCE.getScreenWidth() - w2/2, 40, 1, w2, 80, this);
+        bossBars.add(bossBar);
+        bossBars.add(bossBar1);
+    }
+
 }
