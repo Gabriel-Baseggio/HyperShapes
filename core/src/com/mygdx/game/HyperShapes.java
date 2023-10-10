@@ -21,7 +21,7 @@ public class HyperShapes extends Game {
         this.camera = new OrthographicCamera();
         this.camera.setToOrtho(false, screenWidth, screenHeight);
 
-        setScreen(new GameScreen(camera));
+        setScreen(new TitleScreen(camera));
     }
 
     public OrthographicCamera getCamera() {
