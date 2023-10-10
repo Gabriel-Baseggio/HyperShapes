@@ -1,0 +1,160 @@
+package com.mygdx.game.entities;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.mygdx.game.GameScreen;
+
+import static com.mygdx.game.helper.BodyHelper.createCircle;
+import static com.mygdx.game.helper.Constants.PPM;
+import static com.mygdx.game.helper.ContactType.PLAYERPROJECTILE;
+
+public class PlayerProjectile extends InputAdapter {
+
+    private Body body;
+    private float x, y, speed;
+    private int diameter;
+    private Texture texture;
+    private GameScreen gameScreen;
+    private boolean canShoot;
+    private boolean drawLine;
+    private boolean touchedDown;
+    private float shootDelay;
+    private float deltaTime;
+
+    public PlayerProjectile(float x, float y, int diameter, String texture, GameScreen gameScreen) {
+        this.x = x;
+        this.y = y;
+        this.gameScreen = gameScreen;
+        this.speed = 1000000;
+        this.diameter = diameter;
+        this.texture = new Texture(texture);
+        this.body = createCircle(x, y, diameter, false, 1, gameScreen.getWorld(), PLAYERPROJECTILE, new FixtureDef());
+
+        this.canShoot = false;
+        this.shootDelay = 3f;
+        this.deltaTime = 0;
+        this.drawLine = false;
+        this.touchedDown = false;
+
+        Gdx.input.setInputProcessor(this);
+
+    }
+
+    public void update(float deltaTime) {
+        this.deltaTime = deltaTime;
+        x = body.getPosition().x * PPM - diameter;
+        y = body.getPosition().y * PPM - diameter;
+
+        shootDelay += deltaTime;
+
+        if (!canShoot || shootDelay < 3) {
+            drawLine = false;
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            body.setLinearVelocity(0, 0);
+        }
+
+    }
+
+    public void renderLine(ShapeRenderer s) {
+        if (drawLine) {
+//            Vector2 p1 = new Vector2(Gdx.input.getX(), (Gdx.graphics.getHeight() - Gdx.input.getY()));
+//            Vector2 p2 = new Vector2(x + diameter, y + diameter);
+//            Vector2 p3 = new Vector2(p2).sub(p1).scl(500f).add(p2);
+
+            Vector2 p1 = new Vector2(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
+            Vector2 p2 = new Vector2(x + diameter, y + diameter);
+            Vector2 mouseToP2 = p2.cpy().sub(p1);
+            Vector2 extendedP1 = p1.cpy().sub(mouseToP2.nor().scl(10000f));
+
+            s.setColor(Color.WHITE);
+            s.rectLine(extendedP1, p2, 2);
+        }
+    }
+
+    public void render(SpriteBatch batch, Texture textura) {
+        batch.draw(textura, x + (diameter/2), y + (diameter/2), diameter, diameter);
+    }
+
+    public Body getBody() {
+        return body;
+    }
+
+    public void setCanShoot(boolean canShoot) {
+        this.canShoot = canShoot;
+    }
+
+    public boolean getCanShoot() {
+        return canShoot;
+    }
+
+    public void applyForceToFollowMouse(float mouseX, float mouseY, float deltaTime) {
+        if (canShoot && shootDelay >= 3) {
+            float angle = MathUtils.atan2(mouseY - body.getPosition().y, mouseX - body.getPosition().x);
+
+//            Vector2 p1 = new Vector2(mouseX, mouseY);
+//            Vector2 p2 = new Vector2(body.getPosition().x, body.getPosition().y);
+//            Vector2 p3 = new Vector2(p2).sub(p1).scl(500f).add(p2);
+//            float angle = MathUtils.atan2(p3.y - body.getPosition().y, p3.x - body.getPosition().x);
+
+            float forceX = MathUtils.cos(angle) * speed * deltaTime;
+            float forceY = MathUtils.sin(angle) * speed * deltaTime;
+
+            shootDelay = 0;
+            body.applyForceToCenter(forceX, forceY, true);
+        } else {
+            canShoot = false;
+        }
+
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        if (canShoot && shootDelay >= 3) {
+            gameScreen.setSlowEffect(true);
+            touchedDown = true;
+            drawLine = true;
+            body.setLinearVelocity(0, 0);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        if (canShoot && shootDelay >= 3 && touchedDown) {
+            touchedDown = false;
+            gameScreen.setSlowEffect(false);
+            gameScreen.getTimeHelper().setTimeScale(1f);
+            body.setLinearVelocity(0, 0);
+            applyForceToFollowMouse(screenX / PPM, (Gdx.graphics.getHeight() - screenY) / PPM, deltaTime);
+        }
+        drawLine = false;
+        return true;
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        if (canShoot && shootDelay >= 3) {
+            touchedDown = true;
+            body.setLinearVelocity(0, 0);
+            gameScreen.setSlowEffect(true);
+            drawLine = true;
+        }
+        return true;
+    }
+
+    public float getDelayShoot() {
+        return shootDelay;
+    }
+
+}
