@@ -43,7 +43,8 @@ public class TitleScreen extends ScreenAdapter {
 			HyperShapes.INSTANCE.setScreen(new GameScreen(this.camera));
 		}
 	}
-	
+
+	@Override
 	public void render(float delta) {
 		update();
 		
