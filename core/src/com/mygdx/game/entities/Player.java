@@ -17,13 +17,11 @@ public class Player {
     private float x, y, speed, velY, velX;
     private int width, height, score;
     private Texture texture;
-    private GameScreen gameScreen;
 
     public Player(float x, float y, int width, int height, String texture, GameScreen gameScreen) {
         this.x = x;
         this.y = y;
-        this.gameScreen = gameScreen;
-        this.speed = 600;
+        this.speed = 1400;
         this.width = width;
         this.height = height;
         this.texture = new Texture(texture);

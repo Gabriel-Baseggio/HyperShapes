@@ -87,7 +87,9 @@ public class GameScreen extends ScreenAdapter {
 
         this.camera.update();
 
-        this.boss.setStage(2);
+        if (this.player.getScore() == 1) {
+            this.boss.setStage(2);
+        }
 
         if (slowEffect && playerProjectile.getCanShoot()) {
             timeHelper.setTimeScale(0.1f);
@@ -118,13 +120,6 @@ public class GameScreen extends ScreenAdapter {
                 world.destroyBody(bossBar.getBody());
                 iterator2.remove();
             }
-        }
-
-        if (this.player.getScore()%2 == 0) {
-            spawnBars(1, (int) Math.round(HyperShapes.INSTANCE.getScreenWidth() * 0.6), (int) Math.round(HyperShapes.INSTANCE.getScreenWidth() * 0.4));
-//            spawnBars(2, (int) Math.round(HyperShapes.INSTANCE.getScreenWidth() * 0.6), (int) Math.round(HyperShapes.INSTANCE.getScreenWidth() * 0.4));
-            this.boss.setStage(2);
-            this.player.score();
         }
 
         batch.setProjectionMatrix(camera.combined);
@@ -207,25 +202,6 @@ public class GameScreen extends ScreenAdapter {
 
     public TimeHelper getTimeHelper() {
         return timeHelper;
-    }
-
-    public void spawnBars(int pattern, int w1, int w2) {
-        if (bossBars.size() == 0) {
-            switch (pattern) {
-                case 1:
-                    bossBars.add(new BossBar(w1 / 2, HyperShapes.INSTANCE.getScreenHeight() + 80 * 5, -1, w1, 80, this));
-                    bossBars.add(new BossBar(HyperShapes.INSTANCE.getScreenWidth() - w2 / 2, HyperShapes.INSTANCE.getScreenHeight() + 80, -1, w2, 80, this));
-
-                    bossBars.add(new BossBar(w1 / 2, -80 * 5, 1, w1, 80, this));
-                    bossBars.add(new BossBar(HyperShapes.INSTANCE.getScreenWidth() - w2 / 2, -80, 1, w2, 80, this));
-
-                    break;
-                case 2:
-//                    bossBars.add(new BossBar(w1 / 2, -80 * 3, 1, w1, 80, this));
-//                    bossBars.add(new BossBar(HyperShapes.INSTANCE.getScreenWidth() - w2 / 2, HyperShapes.INSTANCE.getScreenHeight() + 80 * 3, -1, w2, 80, this));
-                    break;
-            }
-        }
     }
 
     public ArrayList<BossBar> getBossBars() {

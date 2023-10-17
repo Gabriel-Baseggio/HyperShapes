@@ -59,7 +59,7 @@ public class GameContactListener implements ContactListener {
 
                 for (BossBar bossBar : gameScreen.getBossBars()) {
                     if (bossBar.getX() == x && bossBar.getY() == y) {
-//                        bossBar.setDestroy(true);
+                        bossBar.setDestroy(true);
                         break;
                     }
                 }

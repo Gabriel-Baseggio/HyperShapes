@@ -58,6 +58,7 @@ public class PlayerProjectile extends InputAdapter {
 
         if (!canShoot || shootDelay < 3) {
             drawLine = false;
+            gameScreen.setSlowEffect(false);
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {

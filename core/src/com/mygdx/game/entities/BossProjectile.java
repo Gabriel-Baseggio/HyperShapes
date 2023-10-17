@@ -16,19 +16,17 @@ public class BossProjectile {
     private Body body;
     private float x, y, speed, angX, angY;
     private int diameter;
-    private Texture texture;
     private GameScreen gameScreen;
     private boolean destroy;
 
-    public BossProjectile(float x, float y, float angX, float angY, int diameter, String texture, GameScreen gameScreen) {
+    public BossProjectile(float x, float y, float angX, float angY, GameScreen gameScreen) {
         this.x = x;
         this.y = y;
         this.angX = angX;
         this.angY = angY;
         this.gameScreen = gameScreen;
         this.speed = 800;
-        this.diameter = diameter;
-        this.texture = new Texture(texture);
+        this.diameter = 24;
         this.body = createCircle(x, y, diameter, false, 10000, gameScreen.getWorld(), BOSSPROJECTILE, null);
 
         this.destroy = false;
@@ -46,20 +44,6 @@ public class BossProjectile {
         s.set(ShapeRenderer.ShapeType.Filled);
         s.setColor(Color.GREEN);
         s.ellipse(x + diameter/2, y + diameter/2, diameter, diameter);
-    }
-
-    public static void spawnInCircle(float centerX, float centerY, int numProjectiles, float startingAngle, int circleRadius, String texture, GameScreen gameScreen) {
-        float angleStep = 360f / numProjectiles;
-
-        for (int i = 0; i < numProjectiles; i++) {
-            float x = centerX + circleRadius * MathUtils.cosDeg(startingAngle);
-            float y = centerY + circleRadius * MathUtils.sinDeg(startingAngle);
-
-            BossProjectile bossProjectile = new BossProjectile(x, y, MathUtils.cosDeg(startingAngle), MathUtils.sinDeg(startingAngle), 32, texture, gameScreen);
-            gameScreen.getBossProjectiles().add(bossProjectile);
-
-            startingAngle += angleStep;
-        }
     }
 
     public void setDestroy(boolean destroy) {
