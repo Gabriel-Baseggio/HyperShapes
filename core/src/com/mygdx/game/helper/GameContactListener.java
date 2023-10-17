@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.GameScreen;
 import com.mygdx.game.HyperShapes;
+import com.mygdx.game.entities.BossBar;
 import com.mygdx.game.entities.BossProjectile;
 
 import static com.mygdx.game.helper.Constants.PPM;
@@ -43,6 +44,22 @@ public class GameContactListener implements ContactListener {
                 for (BossProjectile bossProjectile : gameScreen.getBossProjectiles()) {
                     if (bossProjectile.getX() == x && bossProjectile.getY() == y) {
                         bossProjectile.setDestroy(true);
+                        break;
+                    }
+                }
+//                Gdx.app.exit();
+            }
+        }
+
+        if (a.getUserData() == PLAYER || b.getUserData() == PLAYER) {
+            if (a.getUserData() == BOSSBAR || b.getUserData() == BOSSBAR) {
+                float x = a.getUserData() == BOSSBAR ? a.getBody().getPosition().x : b.getBody().getPosition().x;
+
+                float y = a.getUserData() == BOSSBAR ? a.getBody().getPosition().y : b.getBody().getPosition().y;
+
+                for (BossBar bossBar : gameScreen.getBossBars()) {
+                    if (bossBar.getX() == x && bossBar.getY() == y) {
+//                        bossBar.setDestroy(true);
                         break;
                     }
                 }

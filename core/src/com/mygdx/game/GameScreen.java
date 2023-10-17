@@ -120,11 +120,9 @@ public class GameScreen extends ScreenAdapter {
             }
         }
 
-        if (this.player.getScore() == 1) {
-            spawnBars((int) Math.round(HyperShapes.INSTANCE.getScreenWidth() * 0.6), (int) Math.round(HyperShapes.INSTANCE.getScreenWidth() * 0.4));
-            for (BossBar bossBar: bossBars) {
-                System.out.println("BossBar ok: " + bossBar.getBody().getPosition().x);
-            }
+        if (this.player.getScore()%2 == 0) {
+            spawnBars(1, (int) Math.round(HyperShapes.INSTANCE.getScreenWidth() * 0.6), (int) Math.round(HyperShapes.INSTANCE.getScreenWidth() * 0.4));
+//            spawnBars(2, (int) Math.round(HyperShapes.INSTANCE.getScreenWidth() * 0.6), (int) Math.round(HyperShapes.INSTANCE.getScreenWidth() * 0.4));
             this.boss.setStage(2);
             this.player.score();
         }
@@ -211,11 +209,26 @@ public class GameScreen extends ScreenAdapter {
         return timeHelper;
     }
 
-    public void spawnBars(int w1, int w2) {
-        BossBar bossBar = new BossBar(w1/2, HyperShapes.INSTANCE.getScreenHeight() - 40, -1, w1, 80, this);
-        BossBar bossBar1 = new BossBar(HyperShapes.INSTANCE.getScreenWidth() - w2/2, 40, 1, w2, 80, this);
-        bossBars.add(bossBar);
-        bossBars.add(bossBar1);
+    public void spawnBars(int pattern, int w1, int w2) {
+        if (bossBars.size() == 0) {
+            switch (pattern) {
+                case 1:
+                    bossBars.add(new BossBar(w1 / 2, HyperShapes.INSTANCE.getScreenHeight() + 80 * 5, -1, w1, 80, this));
+                    bossBars.add(new BossBar(HyperShapes.INSTANCE.getScreenWidth() - w2 / 2, HyperShapes.INSTANCE.getScreenHeight() + 80, -1, w2, 80, this));
+
+                    bossBars.add(new BossBar(w1 / 2, -80 * 5, 1, w1, 80, this));
+                    bossBars.add(new BossBar(HyperShapes.INSTANCE.getScreenWidth() - w2 / 2, -80, 1, w2, 80, this));
+
+                    break;
+                case 2:
+//                    bossBars.add(new BossBar(w1 / 2, -80 * 3, 1, w1, 80, this));
+//                    bossBars.add(new BossBar(HyperShapes.INSTANCE.getScreenWidth() - w2 / 2, HyperShapes.INSTANCE.getScreenHeight() + 80 * 3, -1, w2, 80, this));
+                    break;
+            }
+        }
     }
 
+    public ArrayList<BossBar> getBossBars() {
+        return bossBars;
+    }
 }

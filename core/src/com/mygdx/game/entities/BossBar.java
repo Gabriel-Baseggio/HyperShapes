@@ -12,7 +12,6 @@ import static com.mygdx.game.helper.ContactType.BOSSBAR;
 
 public class BossBar {
 
-    private GameScreen gameScreen;
     private Body body;
     private float x, y;
     private float velY, speed;
@@ -22,11 +21,10 @@ public class BossBar {
     public BossBar(float x, float y, float velY, int width, int height, GameScreen gameScreen) {
         this.x = x;
         this.y = y;
-        this.speed = 1000;
+        this.speed = 500;
         this.velY = velY;
         this.width = width;
         this.height = height;
-        this.gameScreen = gameScreen;
 
         this.body = createSensorBox(x, y, width, height, gameScreen.getWorld(), BOSSBAR);
 
@@ -37,7 +35,7 @@ public class BossBar {
         x = body.getPosition().x * PPM;
         y = body.getPosition().y * PPM;
 
-        if (y > HyperShapes.INSTANCE.getScreenHeight() || y < 0) {
+        if (y > HyperShapes.INSTANCE.getScreenHeight() + 450 || y < -450) {
             this.destroy = true;
         }
 
@@ -55,5 +53,17 @@ public class BossBar {
 
     public Body getBody() {
         return body;
+    }
+
+    public float getX() {
+        return body.getPosition().x;
+    }
+
+    public float getY() {
+        return body.getPosition().y;
+    }
+
+    public void setDestroy(boolean destroy) {
+        this.destroy = destroy;
     }
 }

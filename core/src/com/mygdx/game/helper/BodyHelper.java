@@ -46,10 +46,7 @@ public class BodyHelper {
         FixtureDef fixSensor = new FixtureDef();
         fixSensor.shape = shape;
         fixSensor.isSensor = true;
-        FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.shape = shape;
 
-        body.createFixture(fixtureDef);
         body.createFixture(fixSensor).setUserData(type);
 
         shape.dispose();
