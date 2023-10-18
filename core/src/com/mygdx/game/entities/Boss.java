@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.mygdx.game.GameScreen;
 import com.mygdx.game.HyperShapes;
+import com.mygdx.game.TitleScreen;
 import com.mygdx.game.helper.AnimationHelper;
 
 import java.util.ArrayList;
@@ -35,6 +36,8 @@ public class Boss {
     private int stage;
     private float time;
     private boolean alreadySpawned;
+
+    private float secondStageTime;
     private int[] prevPattern;
     private int iPattern;
 
@@ -57,6 +60,7 @@ public class Boss {
 
         this.prevPattern = new int[2];
         this.iPattern = 0;
+        this.secondStageTime = 0;
 
     }
 
@@ -77,6 +81,7 @@ public class Boss {
             x = -200;
             y = 0;
             body.setTransform(-200, 0, 0);
+            secondStageTime += deltaTime;
 
             if (time >= 1.25) {
                 int newPattern;
@@ -91,6 +96,10 @@ public class Boss {
                 }
                 spawnBars(newPattern);
                 time = 0;
+            }
+
+            if (secondStageTime >= 31.25) {
+                HyperShapes.INSTANCE.setScreen(new TitleScreen(gameScreen.getCamera()));
             }
 
         }
