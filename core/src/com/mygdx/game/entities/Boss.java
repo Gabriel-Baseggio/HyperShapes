@@ -12,6 +12,9 @@ import com.mygdx.game.GameScreen;
 import com.mygdx.game.HyperShapes;
 import com.mygdx.game.helper.AnimationHelper;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static com.mygdx.game.helper.BodyHelper.createCircle;
 import static com.mygdx.game.helper.Constants.PPM;
 import static com.mygdx.game.helper.ContactType.BOSS;
@@ -32,6 +35,8 @@ public class Boss {
     private int stage;
     private float time;
     private boolean alreadySpawned;
+    private int[] prevPattern;
+    private int iPattern;
 
 
     public Boss(float x, float y, int diameter, String texture, GameScreen gameScreen) {
@@ -50,17 +55,20 @@ public class Boss {
         this.time = 0;
         this.alreadySpawned = false;
 
+        this.prevPattern = new int[2];
+        this.iPattern = 0;
+
     }
 
     public void update(float deltaTime) {
         time += deltaTime;
 
         if (stage == 1 && time >= 0.5 && !alreadySpawned) {
-            spawnProjectilesInCircle(x, y, 16, 0, diameter / 2, "patinho.png", gameScreen);
+            spawnProjectilesInCircle(x, y, 16, 0, diameter - 50, gameScreen);
             alreadySpawned = true;
         }
         if (stage == 1 && time >= 1 && alreadySpawned) {
-            spawnProjectilesInCircle(x, y, 16, 360 / 32, diameter / 2, "patinho.png", gameScreen);
+            spawnProjectilesInCircle(x, y, 16, 360 / 32, diameter - 50, gameScreen);
             time = 0;
             alreadySpawned = false;
         }
@@ -70,33 +78,23 @@ public class Boss {
             y = 0;
             body.setTransform(-200, 0, 0);
 
-            if (time >= 4) {
-                spawnBars(generatePatternSequence());
+            if (time >= 1.25) {
+                int newPattern;
+                do {
+                    newPattern = (int) Math.floor((Math.random() * 4 + 1));
+                } while (newPattern == prevPattern[0] || newPattern == prevPattern[1]);
+                prevPattern[iPattern] = newPattern;
+                if (iPattern < prevPattern.length-1) {
+                    iPattern++;
+                } else {
+                    iPattern = 0;
+                }
+                spawnBars(newPattern);
                 time = 0;
             }
+
         }
 
-    }
-
-    private int[] generatePatternSequence() {
-        int[] patterns = new int[4];
-        int[] positions = new int[4];
-        for (int i = 1; i <= patterns.length; i++){
-            int pos = (int) Math.floor(Math.random() * 4);
-            System.out.println(pos);
-            boolean cont = false;
-            for (int j = 0; j < positions.length; j++) {
-                if (pos == positions[j]) {
-                    i--;
-                    cont = true;
-                }
-            }
-            if (cont){
-                continue;
-            }
-            patterns[pos] = i;
-        }
-        return patterns;
     }
 
     public void render(SpriteBatch batch) {
@@ -112,7 +110,7 @@ public class Boss {
         }
     }
 
-    public static void spawnProjectilesInCircle(float centerX, float centerY, int numProjectiles, float startingAngle, int circleRadius, String texture, GameScreen gameScreen) {
+    public static void spawnProjectilesInCircle(float centerX, float centerY, int numProjectiles, float startingAngle, int circleRadius, GameScreen gameScreen) {
         float angleStep = 360f / numProjectiles;
 
         for (int i = 0; i < numProjectiles; i++) {
@@ -125,38 +123,34 @@ public class Boss {
         }
     }
 
-    public void spawnBars(int[] patterns) {
-        for (int i = 0; i < patterns.length; i++) {
-            int pattern = patterns[i];
-//            System.out.println(pattern);
+    public void spawnBars(int pattern) {
+        int w1 = Math.round(HyperShapes.INSTANCE.getScreenWidth() * 0.6f);
+        int w2 = Math.round(HyperShapes.INSTANCE.getScreenWidth() * 0.4f);
 
-            int w1 = Math.round(HyperShapes.INSTANCE.getScreenWidth() * 0.6f);
-            int w2 = Math.round(HyperShapes.INSTANCE.getScreenWidth() * 0.4f);
-
-            if (pattern > 2) {
-                w1 = Math.round(HyperShapes.INSTANCE.getScreenWidth() * 0.52f);
-                w2 = Math.round(HyperShapes.INSTANCE.getScreenWidth() * 0.52f);
-            }
-
-            switch (pattern) {
-                case 1:
-                    gameScreen.getBossBars().add(new BossBar(w1 / 2, -80 * 3, 1, w1, 80, gameScreen));
-                    gameScreen.getBossBars().add(new BossBar(HyperShapes.INSTANCE.getScreenWidth() - w2 / 2, HyperShapes.INSTANCE.getScreenHeight() + 80 * 3, -1, w2, 80, gameScreen));
-                    break;
-                case 2:
-                    gameScreen.getBossBars().add(new BossBar(w1 / 2, HyperShapes.INSTANCE.getScreenHeight() + 80 * 3, -1, w1, 80, gameScreen));
-                    gameScreen.getBossBars().add(new BossBar(HyperShapes.INSTANCE.getScreenWidth() - w2 / 2, -80 * 3, 1, w2, 80, gameScreen));
-                    break;
-                case 3:
-                    gameScreen.getBossBars().add(new BossBar(w1 / 2, -80 * 3, 1, w1, 80, gameScreen));
-                    gameScreen.getBossBars().add(new BossBar(w2 / 2, HyperShapes.INSTANCE.getScreenHeight() + 80 * 3, -1, w2, 80, gameScreen));
-                    break;
-                case 4:
-                    gameScreen.getBossBars().add(new BossBar(HyperShapes.INSTANCE.getScreenWidth() - w1 / 2, -80 * 3, 1, w1, 80, gameScreen));
-                    gameScreen.getBossBars().add(new BossBar(HyperShapes.INSTANCE.getScreenWidth() - w2 / 2, HyperShapes.INSTANCE.getScreenHeight() + 80 * 3, -1, w2, 80, gameScreen));
-                    break;
-            }
+        if (pattern > 2) {
+            w1 = Math.round(HyperShapes.INSTANCE.getScreenWidth() * 0.52f);
+            w2 = Math.round(HyperShapes.INSTANCE.getScreenWidth() * 0.52f);
         }
+
+        switch (pattern) {
+            case 1:
+                gameScreen.getBossBars().add(new BossBar(w1 / 2, -80 * 3, 1, w1, 80, gameScreen));
+                gameScreen.getBossBars().add(new BossBar(HyperShapes.INSTANCE.getScreenWidth() - w2 / 2, HyperShapes.INSTANCE.getScreenHeight() + 80 * 3, -1, w2, 80, gameScreen));
+                break;
+            case 2:
+                gameScreen.getBossBars().add(new BossBar(w1 / 2, HyperShapes.INSTANCE.getScreenHeight() + 80 * 3, -1, w1, 80, gameScreen));
+                gameScreen.getBossBars().add(new BossBar(HyperShapes.INSTANCE.getScreenWidth() - w2 / 2, -80 * 3, 1, w2, 80, gameScreen));
+                break;
+            case 3:
+                gameScreen.getBossBars().add(new BossBar(w1 / 2, -80 * 3, 1, w1, 80, gameScreen));
+                gameScreen.getBossBars().add(new BossBar(w2 / 2, HyperShapes.INSTANCE.getScreenHeight() + 80 * 3, -1, w2, 80, gameScreen));
+                break;
+            case 4:
+                gameScreen.getBossBars().add(new BossBar(HyperShapes.INSTANCE.getScreenWidth() - w1 / 2, -80 * 3, 1, w1, 80, gameScreen));
+                gameScreen.getBossBars().add(new BossBar(HyperShapes.INSTANCE.getScreenWidth() - w2 / 2, HyperShapes.INSTANCE.getScreenHeight() + 80 * 3, -1, w2, 80, gameScreen));
+                break;
+        }
+
     }
 
     public void setWasHit(boolean wasHit) {

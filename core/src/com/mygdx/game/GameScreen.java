@@ -87,7 +87,7 @@ public class GameScreen extends ScreenAdapter {
 
         this.camera.update();
 
-        if (this.player.getScore() == 1) {
+        if (this.player.getScore() == 3) {
             this.boss.setStage(2);
         }
 
