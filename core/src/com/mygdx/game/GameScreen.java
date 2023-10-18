@@ -173,7 +173,7 @@ public class GameScreen extends ScreenAdapter {
 
         shapeRenderer.end();
 
-        this.box2DDebugRenderer.render(world, camera.combined.scl(PPM));
+//        this.box2DDebugRenderer.render(world, camera.combined.scl(PPM));
     }
 
     public World getWorld() {
@@ -206,5 +206,9 @@ public class GameScreen extends ScreenAdapter {
 
     public ArrayList<BossBar> getBossBars() {
         return bossBars;
+    }
+
+    public OrthographicCamera getCamera() {
+        return this.camera;
     }
 }

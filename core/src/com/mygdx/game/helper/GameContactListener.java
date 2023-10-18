@@ -2,6 +2,7 @@ package com.mygdx.game.helper;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
+import com.mygdx.game.GameOverScreen;
 import com.mygdx.game.GameScreen;
 import com.mygdx.game.HyperShapes;
 import com.mygdx.game.entities.BossBar;
@@ -31,7 +32,7 @@ public class GameContactListener implements ContactListener {
 
         if (a.getUserData() == PLAYER || b.getUserData() == PLAYER) {
             if (a.getUserData() == BOSS || b.getUserData() == BOSS) {
-//                Gdx.app.exit();
+                HyperShapes.INSTANCE.setScreen(new GameOverScreen(gameScreen.getCamera()));
             }
         }
 
@@ -47,7 +48,7 @@ public class GameContactListener implements ContactListener {
                         break;
                     }
                 }
-//                Gdx.app.exit();
+                HyperShapes.INSTANCE.setScreen(new GameOverScreen(gameScreen.getCamera()));
             }
         }
 
@@ -63,7 +64,7 @@ public class GameContactListener implements ContactListener {
                         break;
                     }
                 }
-//                Gdx.app.exit();
+                HyperShapes.INSTANCE.setScreen(new GameOverScreen(gameScreen.getCamera()));
             }
         }
 
