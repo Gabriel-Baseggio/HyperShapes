@@ -67,11 +67,11 @@ public class Boss {
     public void update(float deltaTime) {
         time += deltaTime;
 
-        if (stage == 1 && time >= 0.5 && !alreadySpawned) {
+        if (stage == 1 && time >= 0.75 && !alreadySpawned) {
             spawnProjectilesInCircle(x, y, 16, 0, diameter - 50, gameScreen);
             alreadySpawned = true;
         }
-        if (stage == 1 && time >= 1 && alreadySpawned) {
+        if (stage == 1 && time >= 1.5 && alreadySpawned) {
             spawnProjectilesInCircle(x, y, 16, 360 / 32, diameter - 50, gameScreen);
             time = 0;
             alreadySpawned = false;
@@ -83,7 +83,7 @@ public class Boss {
             body.setTransform(-200, 0, 0);
             secondStageTime += deltaTime;
 
-            if (time >= 1.25) {
+            if (time >= 1.5 && secondStageTime >= 2) {
                 int newPattern;
                 do {
                     newPattern = (int) Math.floor((Math.random() * 4 + 1));
@@ -98,7 +98,7 @@ public class Boss {
                 time = 0;
             }
 
-            if (secondStageTime >= 31.25) {
+            if (secondStageTime >= 39.5) {
                 HyperShapes.INSTANCE.setScreen(new TitleScreen(gameScreen.getCamera()));
             }
 
@@ -180,5 +180,13 @@ public class Boss {
 
     public Body getBody() {
         return body;
+    }
+
+    public int getStage() {
+        return this.stage;
+    }
+
+    public double getSecondStageTime() {
+        return this.secondStageTime;
     }
 }

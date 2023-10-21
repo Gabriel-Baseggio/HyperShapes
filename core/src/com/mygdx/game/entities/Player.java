@@ -21,7 +21,7 @@ public class Player {
     public Player(float x, float y, int width, int height, String texture, GameScreen gameScreen) {
         this.x = x;
         this.y = y;
-        this.speed = 1400;
+        this.speed = 1200;
         this.width = width;
         this.height = height;
         this.texture = new Texture(texture);

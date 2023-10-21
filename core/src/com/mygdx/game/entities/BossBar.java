@@ -21,7 +21,7 @@ public class BossBar {
     public BossBar(float x, float y, float velY, int width, int height, GameScreen gameScreen) {
         this.x = x;
         this.y = y;
-        this.speed = 800;
+        this.speed = 600;
         this.velY = velY;
         this.width = width;
         this.height = height;
