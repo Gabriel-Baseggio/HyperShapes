@@ -71,7 +71,7 @@ public class BodyHelper {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.friction = 0;
-        fixtureDef.restitution = 0.5f;
+        fixtureDef.restitution = 0.25f;
         fixtureDef.density = density;
 
         if (fixSensor != null) {

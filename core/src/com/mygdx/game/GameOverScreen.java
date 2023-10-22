@@ -9,12 +9,10 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class GameOverScreen extends ScreenAdapter {
     private OrthographicCamera camera;
     private SpriteBatch batch;
-    private ShapeRenderer shapeRenderer;
 
     private FreeTypeFontGenerator generator;
     private FreeTypeFontGenerator.FreeTypeFontParameter parameter;
@@ -23,7 +21,6 @@ public class GameOverScreen extends ScreenAdapter {
     public GameOverScreen(OrthographicCamera camera) {
         this.camera = camera;
         this.batch = new SpriteBatch();
-        this.shapeRenderer = new ShapeRenderer();
 
         this.generator = new FreeTypeFontGenerator(Gdx.files.internal("font.ttf"));
         this.parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -55,6 +52,14 @@ public class GameOverScreen extends ScreenAdapter {
         batch.begin();
 
         bitmap.draw(batch, "Game Over!", HyperShapes.INSTANCE.getScreenWidth() / 2 - ("Game Over!").length() * 20, HyperShapes.INSTANCE.getScreenHeight() / 2);
+
         batch.end();
+    }
+
+    @Override
+    public void dispose() {
+        bitmap.dispose();
+        generator.dispose();
+        batch.dispose();
     }
 }

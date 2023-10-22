@@ -68,11 +68,11 @@ public class Boss {
         time += deltaTime;
 
         if (stage == 1 && time >= 0.75 && !alreadySpawned) {
-            spawnProjectilesInCircle(x, y, 16, 0, diameter - 50, gameScreen);
+            spawnProjectilesInCircle(x, y, 20, 0, diameter - 50, gameScreen);
             alreadySpawned = true;
         }
         if (stage == 1 && time >= 1.5 && alreadySpawned) {
-            spawnProjectilesInCircle(x, y, 16, 360 / 32, diameter - 50, gameScreen);
+            spawnProjectilesInCircle(x, y, 20, 360 / 40, diameter - 50, gameScreen);
             time = 0;
             alreadySpawned = false;
         }

@@ -32,7 +32,7 @@ public class GameContactListener implements ContactListener {
 
         if (a.getUserData() == PLAYER || b.getUserData() == PLAYER) {
             if (a.getUserData() == BOSS || b.getUserData() == BOSS) {
-                HyperShapes.INSTANCE.setScreen(new GameOverScreen(gameScreen.getCamera()));
+                gameScreen.getPlayer().lost();
             }
         }
 
@@ -48,7 +48,7 @@ public class GameContactListener implements ContactListener {
                         break;
                     }
                 }
-                HyperShapes.INSTANCE.setScreen(new GameOverScreen(gameScreen.getCamera()));
+                gameScreen.getPlayer().lost();
             }
         }
 
@@ -64,7 +64,7 @@ public class GameContactListener implements ContactListener {
                         break;
                     }
                 }
-                HyperShapes.INSTANCE.setScreen(new GameOverScreen(gameScreen.getCamera()));
+                gameScreen.getPlayer().lost();
             }
         }
 

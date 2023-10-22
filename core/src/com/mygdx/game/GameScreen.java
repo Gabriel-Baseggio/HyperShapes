@@ -55,8 +55,8 @@ public class GameScreen extends ScreenAdapter {
         this.gameContactListener = new GameContactListener(this);
         this.world.setContactListener(this.gameContactListener);
 
-        this.player = new Player(HyperShapes.INSTANCE.getScreenWidth() / 2 - 300, HyperShapes.INSTANCE.getScreenHeight() / 2 - 200, 48, 48, "patinho.png", this);
-        this.playerProjectile = new PlayerProjectile(HyperShapes.INSTANCE.getScreenWidth() / 2 + 100, HyperShapes.INSTANCE.getScreenHeight() / 2 - 200, 28, "SaboneteRosa.png", this);
+        this.player = new Player(this);
+        this.playerProjectile = new PlayerProjectile(this);
 
         this.slowEffect = false;
         this.timeHelper = new TimeHelper();
@@ -67,8 +67,8 @@ public class GameScreen extends ScreenAdapter {
         this.wallLeft = new Wall(16, HyperShapes.INSTANCE.getScreenHeight()/2, 32, HyperShapes.INSTANCE.getScreenHeight(), "patinho.png", this);
 
         this.boss = new Boss(HyperShapes.INSTANCE.getScreenWidth() / 2, HyperShapes.INSTANCE.getScreenHeight() / 2, 192, "PrimeiroBoss.png", this);
-        this.bossProjectiles = new ArrayList<BossProjectile>();
-        this.bossBars = new ArrayList<BossBar>();
+        this.bossProjectiles = new ArrayList<>();
+        this.bossBars = new ArrayList<>();
 
         this.shapeRenderer = new ShapeRenderer();
 
@@ -89,12 +89,17 @@ public class GameScreen extends ScreenAdapter {
 
         if (this.player.getScore() == 3) {
             this.boss.setStage(2);
+            this.bossProjectiles.clear();
         }
 
         if (slowEffect && playerProjectile.getCanShoot()) {
             timeHelper.setTimeScale(0.1f);
         } else {
             timeHelper.setTimeScale(1f);
+        }
+
+        if (player.getLost() == true) {
+            HyperShapes.INSTANCE.setScreen(new GameOverScreen(camera));
         }
 
         this.player.update(timeHelper.getDeltaTime());
@@ -179,6 +184,16 @@ public class GameScreen extends ScreenAdapter {
         shapeRenderer.end();
 
 //        this.box2DDebugRenderer.render(world, camera.combined.scl(PPM));
+    }
+
+    @Override
+    public void dispose() {
+        world.dispose();
+        box2DDebugRenderer.dispose();
+        shapeRenderer.dispose();
+        bitmap.dispose();
+        generator.dispose();
+        batch.dispose();
     }
 
     public World getWorld() {

@@ -10,15 +10,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
 public class TitleScreen extends ScreenAdapter {
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
-	private ShapeRenderer shapeRenderer;
-	
+
 	private FreeTypeFontGenerator generator;
     private FreeTypeFontGenerator.FreeTypeFontParameter parameter;
     private BitmapFont bitmap;
@@ -26,8 +22,7 @@ public class TitleScreen extends ScreenAdapter {
 	public TitleScreen(OrthographicCamera camera) {
 		this.camera = camera;
 		this.batch = new SpriteBatch();
-		this.shapeRenderer = new ShapeRenderer();
-		
+
 		this.generator = new FreeTypeFontGenerator(Gdx.files.internal("font.ttf"));
         this.parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         this.parameter.size = 30;
@@ -41,6 +36,10 @@ public class TitleScreen extends ScreenAdapter {
 	public void update() {
 		if (Gdx.input.isKeyPressed(Input.Keys.ENTER) || Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
 			HyperShapes.INSTANCE.setScreen(new GameScreen(this.camera));
+		}
+
+		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+			Gdx.app.exit();
 		}
 	}
 
@@ -58,7 +57,14 @@ public class TitleScreen extends ScreenAdapter {
         batch.draw(new Texture("patinho.png"), HyperShapes.INSTANCE.getScreenWidth() / 2 - 80 , HyperShapes.INSTANCE.getScreenHeight() / 2 - 200, 128 , 128);
         
         bitmap.draw(batch, "Hyper Shapes", HyperShapes.INSTANCE.getScreenWidth() / 2 - ("Hyper Shapes").length() / 2 * 20, HyperShapes.INSTANCE.getScreenHeight() / 2);
-        batch.end();
+
+		batch.end();
 	}
-	
+
+	@Override
+	public void dispose() {
+		bitmap.dispose();
+		generator.dispose();
+		batch.dispose();
+	}
 }
