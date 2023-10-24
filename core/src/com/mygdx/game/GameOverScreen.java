@@ -14,13 +14,17 @@ public class GameOverScreen extends ScreenAdapter {
     private OrthographicCamera camera;
     private SpriteBatch batch;
 
+    private GameScreen gameScreen;
+
     private FreeTypeFontGenerator generator;
     private FreeTypeFontGenerator.FreeTypeFontParameter parameter;
     private BitmapFont bitmap;
 
-    public GameOverScreen(OrthographicCamera camera) {
+    public GameOverScreen(OrthographicCamera camera, GameScreen gameScreen) {
         this.camera = camera;
         this.batch = new SpriteBatch();
+
+        this.gameScreen = gameScreen;
 
         this.generator = new FreeTypeFontGenerator(Gdx.files.internal("font.ttf"));
         this.parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -51,7 +55,9 @@ public class GameOverScreen extends ScreenAdapter {
 
         batch.begin();
 
-        bitmap.draw(batch, "Game Over!", HyperShapes.INSTANCE.getScreenWidth() / 2 - ("Game Over!").length() * 20, HyperShapes.INSTANCE.getScreenHeight() / 2);
+        bitmap.draw(batch, "Game Over!", HyperShapes.INSTANCE.getScreenWidth() / 2 - ("Game Over!").length() / 2 * 40, HyperShapes.INSTANCE.getScreenHeight() / 2);
+        bitmap.draw(batch, "Seus pontos: " + gameScreen.getPlayer().getScore(), HyperShapes.INSTANCE.getScreenWidth() / 2 - ("Seus pontos: " + gameScreen.getPlayer().getScore()).length() / 2 *  40, HyperShapes.INSTANCE.getScreenHeight() / 2 - 200);
+        bitmap.draw(batch, "Highscore: " + HyperShapes.INSTANCE.getHighscore(), HyperShapes.INSTANCE.getScreenWidth() / 2 - ("Highscore: " + HyperShapes.INSTANCE.getHighscore()).length() / 2 *  40, HyperShapes.INSTANCE.getScreenHeight() / 2 - 100);
 
         batch.end();
     }

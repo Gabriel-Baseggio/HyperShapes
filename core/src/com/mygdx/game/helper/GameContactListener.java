@@ -1,14 +1,11 @@
 package com.mygdx.game.helper;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.*;
-import com.mygdx.game.GameOverScreen;
 import com.mygdx.game.GameScreen;
 import com.mygdx.game.HyperShapes;
 import com.mygdx.game.entities.BossBar;
 import com.mygdx.game.entities.BossProjectile;
 
-import static com.mygdx.game.helper.Constants.PPM;
 import static com.mygdx.game.helper.ContactType.*;
 
 public class GameContactListener implements ContactListener {
@@ -33,6 +30,9 @@ public class GameContactListener implements ContactListener {
         if (a.getUserData() == PLAYER || b.getUserData() == PLAYER) {
             if (a.getUserData() == BOSS || b.getUserData() == BOSS) {
                 gameScreen.getPlayer().lost();
+                if (HyperShapes.INSTANCE.getHighscore() < (int) Math.pow(gameScreen.getPlayer().getScore(), HyperShapes.INSTANCE.getDifficulty())) {
+                    HyperShapes.INSTANCE.setHighscore((int) Math.pow(gameScreen.getPlayer().getScore(), HyperShapes.INSTANCE.getDifficulty()));
+                }
             }
         }
 
@@ -49,6 +49,9 @@ public class GameContactListener implements ContactListener {
                     }
                 }
                 gameScreen.getPlayer().lost();
+                if (HyperShapes.INSTANCE.getHighscore() < (int) Math.pow(gameScreen.getPlayer().getScore(), HyperShapes.INSTANCE.getDifficulty())) {
+                    HyperShapes.INSTANCE.setHighscore((int) Math.pow(gameScreen.getPlayer().getScore(), HyperShapes.INSTANCE.getDifficulty()));
+                }
             }
         }
 
@@ -65,6 +68,9 @@ public class GameContactListener implements ContactListener {
                     }
                 }
                 gameScreen.getPlayer().lost();
+                if (HyperShapes.INSTANCE.getHighscore() < (int) Math.pow(gameScreen.getPlayer().getScore(), HyperShapes.INSTANCE.getDifficulty())) {
+                    HyperShapes.INSTANCE.setHighscore((int) Math.pow(gameScreen.getPlayer().getScore(), HyperShapes.INSTANCE.getDifficulty()));
+                }
             }
         }
 

@@ -66,6 +66,8 @@ public class Boss {
     }
 
     public void update(float deltaTime) {
+        x = body.getPosition().x * PPM;
+        y = body.getPosition().y * PPM;
         time += deltaTime;
 
         if (stage == 1 && time >= defineDifficulty(0.75f)) {
@@ -82,12 +84,10 @@ public class Boss {
         }
 
         if (stage == 2) {
-            x = -200;
-            y = 0;
-            body.setTransform(-200, 0, 0);
+            body.setTransform(x, y, 0);
             secondStageTime += deltaTime;
 
-            if (time >= defineDifficulty(1.5f) && secondStageTime >= 2) {
+            if (time >= defineDifficulty(1.5f) && secondStageTime >= 2 && secondStageTime <= defineDifficulty(1.5f)*25+2) {
                 int newPattern;
                 do {
                     newPattern = (int) Math.floor((Math.random() * 4 + 1));
@@ -102,8 +102,14 @@ public class Boss {
                 time = 0;
             }
 
-            if (secondStageTime >= 39.5) {
-                HyperShapes.INSTANCE.setScreen(new TitleScreen(gameScreen.getCamera()));
+            if (secondStageTime >= defineDifficulty(1.5f)*25+5) {
+                this.setStage(1);
+                secondStageTime = 0;
+                body.setTransform(HyperShapes.INSTANCE.getScreenWidth()/2/PPM, HyperShapes.INSTANCE.getScreenHeight()/2/PPM, 0);
+                time = 0;
+                for (int i = 0; i < 3; i++) {
+                    gameScreen.getPlayer().score();
+                }
             }
 
         }

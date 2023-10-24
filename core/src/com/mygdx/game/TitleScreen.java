@@ -44,7 +44,7 @@ public class TitleScreen extends ScreenAdapter {
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.NUM_3)) {
 			HyperShapes.INSTANCE.setScreen(new GameScreen(this.camera));
-			HyperShapes.INSTANCE.setDifficulty(5);
+			HyperShapes.INSTANCE.setDifficulty(4);
 		}
 
 		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {

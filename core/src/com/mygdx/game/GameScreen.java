@@ -87,7 +87,7 @@ public class GameScreen extends ScreenAdapter {
 
         this.camera.update();
 
-        if (this.player.getScore() == 3) {
+        if (this.player.getScore()%3 == 0 && this.player.getScore()%6 != 0 ) {
             this.boss.setStage(2);
             Iterator<BossProjectile> iterator3 = bossProjectiles.iterator();
             while (iterator3.hasNext()) {
@@ -104,7 +104,7 @@ public class GameScreen extends ScreenAdapter {
         }
 
         if (player.getLost() == true) {
-            HyperShapes.INSTANCE.setScreen(new GameOverScreen(camera));
+            HyperShapes.INSTANCE.setScreen(new GameOverScreen(camera, this));
         }
 
         this.player.update(timeHelper.getDeltaTime());

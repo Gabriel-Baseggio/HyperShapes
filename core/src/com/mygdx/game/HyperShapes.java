@@ -17,7 +17,7 @@ public class HyperShapes extends Game {
     public void create() {
         this.screenWidth = Gdx.graphics.getWidth();
         this.screenHeight = Gdx.graphics.getHeight();
-        this.difficulty = 0;
+        this.difficulty = 1;
         this.highscore = 0;
         this.camera = new OrthographicCamera();
         this.camera.setToOrtho(false, screenWidth, screenHeight);
