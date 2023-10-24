@@ -89,7 +89,12 @@ public class GameScreen extends ScreenAdapter {
 
         if (this.player.getScore() == 3) {
             this.boss.setStage(2);
-            this.bossProjectiles.clear();
+            Iterator<BossProjectile> iterator3 = bossProjectiles.iterator();
+            while (iterator3.hasNext()) {
+                BossProjectile bossProjectile = iterator3.next();
+                world.destroyBody(bossProjectile.getBody());
+                iterator3.remove();
+            }
         }
 
         if (slowEffect && playerProjectile.getCanShoot()) {
@@ -183,7 +188,7 @@ public class GameScreen extends ScreenAdapter {
 
         shapeRenderer.end();
 
-//        this.box2DDebugRenderer.render(world, camera.combined.scl(PPM));
+        this.box2DDebugRenderer.render(world, camera.combined.scl(PPM));
     }
 
     @Override

@@ -67,14 +67,17 @@ public class Boss {
     public void update(float deltaTime) {
         time += deltaTime;
 
-        if (stage == 1 && time >= 0.75 && !alreadySpawned) {
-            spawnProjectilesInCircle(x, y, 20, 0, diameter - 50, gameScreen);
-            alreadySpawned = true;
-        }
-        if (stage == 1 && time >= 1.5 && alreadySpawned) {
-            spawnProjectilesInCircle(x, y, 20, 360 / 40, diameter - 50, gameScreen);
+        if (stage == 1 && time >= 0.75) {
+            int pattern;
+            if (!alreadySpawned) {
+                pattern = 1;
+                alreadySpawned = true;
+            } else {
+                pattern = 2;
+                alreadySpawned = false;
+            }
+            spawnProjectilesInCircle(pattern, x, y, 17, diameter - 50, gameScreen);
             time = 0;
-            alreadySpawned = false;
         }
 
         if (stage == 2) {
@@ -119,8 +122,13 @@ public class Boss {
         }
     }
 
-    public static void spawnProjectilesInCircle(float centerX, float centerY, int numProjectiles, float startingAngle, int circleRadius, GameScreen gameScreen) {
-        float angleStep = 360f / numProjectiles;
+    public static void spawnProjectilesInCircle(int pattern, float centerX, float centerY, int numProjectiles, int circleRadius, GameScreen gameScreen) {
+        float angleStep =  360f / numProjectiles;
+
+        float startingAngle =  0;
+        if (pattern == 2) {
+            startingAngle = 360f / (numProjectiles*2);
+        }
 
         for (int i = 0; i < numProjectiles; i++) {
             float x = centerX + circleRadius * MathUtils.cosDeg(startingAngle);
