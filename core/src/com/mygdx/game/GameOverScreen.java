@@ -37,7 +37,7 @@ public class GameOverScreen extends ScreenAdapter {
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.ENTER) || Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-            HyperShapes.INSTANCE.setScreen(new GameScreen(this.camera));
+            HyperShapes.INSTANCE.setScreen(new TitleScreen(this.camera));
         }
 
     }

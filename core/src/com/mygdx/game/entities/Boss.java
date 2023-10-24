@@ -20,6 +20,7 @@ import static com.mygdx.game.helper.BodyHelper.createCircle;
 import static com.mygdx.game.helper.Constants.PPM;
 import static com.mygdx.game.helper.ContactType.BOSS;
 import static com.mygdx.game.helper.ContactType.PLAYERPROJECTILE;
+import static com.mygdx.game.helper.DifficultyHelper.defineDifficulty;
 
 public class Boss {
 
@@ -35,7 +36,7 @@ public class Boss {
     private float hitDelay;
     private int stage;
     private float time;
-    private boolean alreadySpawned;
+    private boolean secondPattern;
 
     private float secondStageTime;
     private int[] prevPattern;
@@ -56,7 +57,7 @@ public class Boss {
 
         this.stage = 1;
         this.time = 0;
-        this.alreadySpawned = false;
+        this.secondPattern = false;
 
         this.prevPattern = new int[2];
         this.iPattern = 0;
@@ -67,14 +68,14 @@ public class Boss {
     public void update(float deltaTime) {
         time += deltaTime;
 
-        if (stage == 1 && time >= 0.75) {
+        if (stage == 1 && time >= defineDifficulty(0.75f)) {
             int pattern;
-            if (!alreadySpawned) {
+            if (!secondPattern) {
                 pattern = 1;
-                alreadySpawned = true;
+                secondPattern = true;
             } else {
                 pattern = 2;
-                alreadySpawned = false;
+                secondPattern = false;
             }
             spawnProjectilesInCircle(pattern, x, y, 17, diameter - 50, gameScreen);
             time = 0;
@@ -86,7 +87,7 @@ public class Boss {
             body.setTransform(-200, 0, 0);
             secondStageTime += deltaTime;
 
-            if (time >= 1.5 && secondStageTime >= 2) {
+            if (time >= defineDifficulty(1.5f) && secondStageTime >= 2) {
                 int newPattern;
                 do {
                     newPattern = (int) Math.floor((Math.random() * 4 + 1));

@@ -10,6 +10,7 @@ import com.mygdx.game.GameScreen;
 import static com.mygdx.game.helper.BodyHelper.createCircle;
 import static com.mygdx.game.helper.Constants.PPM;
 import static com.mygdx.game.helper.ContactType.BOSSPROJECTILE;
+import static com.mygdx.game.helper.DifficultyHelper.defineDifficulty;
 
 public class BossProjectile {
 
@@ -25,7 +26,7 @@ public class BossProjectile {
         this.angX = angX;
         this.angY = angY;
         this.gameScreen = gameScreen;
-        this.speed = 800;
+        this.speed = defineDifficulty(800);
         this.diameter = 24;
         this.body = createCircle(x, y, diameter, false, 10000, gameScreen.getWorld(), BOSSPROJECTILE, null);
 

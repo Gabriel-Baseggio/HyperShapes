@@ -9,6 +9,7 @@ import com.mygdx.game.HyperShapes;
 import static com.mygdx.game.helper.BodyHelper.createSensorBox;
 import static com.mygdx.game.helper.Constants.PPM;
 import static com.mygdx.game.helper.ContactType.BOSSBAR;
+import static com.mygdx.game.helper.DifficultyHelper.defineDifficulty;
 
 public class BossBar {
 
@@ -21,7 +22,7 @@ public class BossBar {
     public BossBar(float x, float y, float velY, int width, int height, GameScreen gameScreen) {
         this.x = x;
         this.y = y;
-        this.speed = 600;
+        this.speed = defineDifficulty(600);
         this.velY = velY;
         this.width = width;
         this.height = height;
