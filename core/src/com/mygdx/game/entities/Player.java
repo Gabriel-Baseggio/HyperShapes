@@ -87,9 +87,12 @@ public class Player {
         this.score++;
     }
 
+    public void setScore(int score) { this.score =score; }
+
     public void lost() {
         if (HyperShapes.INSTANCE.getHighscore() < (int) Math.pow(this.score, HyperShapes.INSTANCE.getDifficulty())) {
             HyperShapes.INSTANCE.setHighscore((int) Math.pow(this.score, HyperShapes.INSTANCE.getDifficulty()));
+            this.setScore(HyperShapes.INSTANCE.getHighscore());
         }
         this.lost = true;
     }
