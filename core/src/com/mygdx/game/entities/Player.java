@@ -13,6 +13,7 @@ import com.mygdx.game.HyperShapes;
 import static com.mygdx.game.helper.BodyHelper.createBox;
 import static com.mygdx.game.helper.Constants.PPM;
 import static com.mygdx.game.helper.ContactType.PLAYER;
+import static com.mygdx.game.helper.DifficultyHelper.defineDifficulty;
 
 public class Player {
 
@@ -90,9 +91,8 @@ public class Player {
     public void setScore(int score) { this.score =score; }
 
     public void lost() {
-        if (HyperShapes.INSTANCE.getHighscore() < (int) Math.pow(this.score, HyperShapes.INSTANCE.getDifficulty())) {
-            HyperShapes.INSTANCE.setHighscore((int) Math.pow(this.score, HyperShapes.INSTANCE.getDifficulty()));
-            this.setScore(HyperShapes.INSTANCE.getHighscore());
+        if (HyperShapes.INSTANCE.getHighscore() < (int) defineDifficulty(this.score)) {
+            HyperShapes.INSTANCE.setHighscore((int) defineDifficulty(this.score));
         }
         this.lost = true;
     }
