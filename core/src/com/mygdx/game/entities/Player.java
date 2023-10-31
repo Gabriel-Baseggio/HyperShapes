@@ -94,6 +94,7 @@ public class Player {
         if (HyperShapes.INSTANCE.getHighscore() < (int) defineDifficulty(this.score)) {
             HyperShapes.INSTANCE.setHighscore((int) defineDifficulty(this.score));
         }
+        this.setScore((int) defineDifficulty(this.score));
         this.lost = true;
     }
 
