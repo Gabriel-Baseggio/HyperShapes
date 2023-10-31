@@ -30,9 +30,6 @@ public class GameContactListener implements ContactListener {
         if (a.getUserData() == PLAYER || b.getUserData() == PLAYER) {
             if (a.getUserData() == BOSS || b.getUserData() == BOSS) {
                 gameScreen.getPlayer().lost();
-                if (HyperShapes.INSTANCE.getHighscore() < (int) Math.pow(gameScreen.getPlayer().getScore(), HyperShapes.INSTANCE.getDifficulty())) {
-                    HyperShapes.INSTANCE.setHighscore((int) Math.pow(gameScreen.getPlayer().getScore(), HyperShapes.INSTANCE.getDifficulty()));
-                }
             }
         }
 
@@ -49,9 +46,6 @@ public class GameContactListener implements ContactListener {
                     }
                 }
                 gameScreen.getPlayer().lost();
-                if (HyperShapes.INSTANCE.getHighscore() < (int) Math.pow(gameScreen.getPlayer().getScore(), HyperShapes.INSTANCE.getDifficulty())) {
-                    HyperShapes.INSTANCE.setHighscore((int) Math.pow(gameScreen.getPlayer().getScore(), HyperShapes.INSTANCE.getDifficulty()));
-                }
             }
         }
 
@@ -68,9 +62,6 @@ public class GameContactListener implements ContactListener {
                     }
                 }
                 gameScreen.getPlayer().lost();
-                if (HyperShapes.INSTANCE.getHighscore() < (int) Math.pow(gameScreen.getPlayer().getScore(), HyperShapes.INSTANCE.getDifficulty())) {
-                    HyperShapes.INSTANCE.setHighscore((int) Math.pow(gameScreen.getPlayer().getScore(), HyperShapes.INSTANCE.getDifficulty()));
-                }
             }
         }
 

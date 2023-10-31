@@ -39,6 +39,7 @@ public class Boss {
     private boolean secondPattern;
 
     private float secondStageTime;
+    private int barsCounter;
     private int[] prevPattern;
     private int iPattern;
 
@@ -62,6 +63,8 @@ public class Boss {
         this.prevPattern = new int[2];
         this.iPattern = 0;
         this.secondStageTime = 0;
+
+        this.barsCounter = 0;
 
     }
 
@@ -87,6 +90,11 @@ public class Boss {
             body.setTransform(x, y, 0);
             secondStageTime += deltaTime;
 
+            if (barsCounter == 8) {
+                gameScreen.getPlayer().score();
+                barsCounter = 0;
+            }
+
             if (time >= defineDifficulty(1.5f) && secondStageTime >= 2 && secondStageTime <= defineDifficulty(1.5f)*25+2) {
                 int newPattern;
                 do {
@@ -99,17 +107,16 @@ public class Boss {
                     iPattern = 0;
                 }
                 spawnBars(newPattern);
+                barsCounter++;
                 time = 0;
             }
 
             if (secondStageTime >= defineDifficulty(1.5f)*25+5) {
                 this.setStage(1);
-                secondStageTime = 0;
                 body.setTransform(HyperShapes.INSTANCE.getScreenWidth()/2/PPM, HyperShapes.INSTANCE.getScreenHeight()/2/PPM, 0);
+                barsCounter = 0;
+                secondStageTime = 0;
                 time = 0;
-                for (int i = 0; i < 3; i++) {
-                    gameScreen.getPlayer().score();
-                }
             }
 
         }
