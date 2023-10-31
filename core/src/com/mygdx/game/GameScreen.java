@@ -165,7 +165,7 @@ public class GameScreen extends ScreenAdapter {
             bitmap.draw(batch, "" + Math.round(boss.getSecondStageTime()) + " s", HyperShapes.INSTANCE.getScreenWidth()/2, HyperShapes.INSTANCE.getScreenHeight() - 100);
         }
 
-        bitmap.draw(batch, "Pontos: " + player.getScore(), HyperShapes.INSTANCE.getScreenWidth() - 225, HyperShapes.INSTANCE.getScreenHeight() - 100);
+        bitmap.draw(batch, "Pontos: " + (int) Math.pow(player.getScore(), HyperShapes.INSTANCE.getDifficulty()), HyperShapes.INSTANCE.getScreenWidth() - 225, HyperShapes.INSTANCE.getScreenHeight() - 100);
 
         batch.end();
 
