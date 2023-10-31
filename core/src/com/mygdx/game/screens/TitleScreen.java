@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.mygdx.game.HyperShapes;
 
 public class TitleScreen extends ScreenAdapter {
 	private OrthographicCamera camera;
@@ -65,7 +66,7 @@ public class TitleScreen extends ScreenAdapter {
         batch.draw(new Texture("patinho.png"), HyperShapes.INSTANCE.getScreenWidth() / 2 - 96, HyperShapes.INSTANCE.getScreenHeight() / 2, 64 , 64);
         batch.draw(new Texture("patinho.png"), HyperShapes.INSTANCE.getScreenWidth() / 2 - 80 , HyperShapes.INSTANCE.getScreenHeight() / 2 - 200, 128 , 128);
         
-        bitmap.draw(batch, "Hyper Shapes", HyperShapes.INSTANCE.getScreenWidth() / 2, HyperShapes.INSTANCE.getScreenHeight() / 2);
+        bitmap.draw(batch, "Hyper Shapes", HyperShapes.INSTANCE.getScreenWidth() / 2 - 120, HyperShapes.INSTANCE.getScreenHeight() / 2);
 
         bitmap.draw(batch, "Pressione ESC para sair", 10, HyperShapes.INSTANCE.getScreenHeight() - parameter.size);
 

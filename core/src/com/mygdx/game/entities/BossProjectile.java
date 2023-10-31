@@ -1,11 +1,9 @@
 package com.mygdx.game.entities;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.mygdx.game.GameScreen;
+import com.mygdx.game.screens.GameScreen;
 
 import static com.mygdx.game.helper.BodyHelper.createCircle;
 import static com.mygdx.game.helper.Constants.PPM;

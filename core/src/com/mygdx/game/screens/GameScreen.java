@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -11,12 +11,13 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
+import com.mygdx.game.HyperShapes;
 import com.mygdx.game.entities.*;
+import com.mygdx.game.helper.BodyHelper;
 import com.mygdx.game.helper.GameContactListener;
 import com.mygdx.game.helper.TimeHelper;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 
 import static com.mygdx.game.helper.Constants.PPM;
@@ -133,10 +134,6 @@ public class GameScreen extends ScreenAdapter {
         }
 
         batch.setProjectionMatrix(camera.combined);
-
-        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-            Gdx.app.exit();
-        }
 
     }
 
