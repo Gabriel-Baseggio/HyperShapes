@@ -1,19 +1,16 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.HyperShapes;
 import com.mygdx.game.entities.*;
-import com.mygdx.game.helper.BodyHelper;
+import com.mygdx.game.helper.FontHelper;
 import com.mygdx.game.helper.GameContactListener;
 import com.mygdx.game.helper.TimeHelper;
 
@@ -39,10 +36,6 @@ public class GameScreen extends ScreenAdapter {
     private ArrayList<BossBar> bossBars;
 
     private Wall wallTop, wallRight, wallBottom, wallLeft;
-
-    private FreeTypeFontGenerator generator;
-    private FreeTypeFontGenerator.FreeTypeFontParameter parameter;
-    private BitmapFont bitmap;
 
     private boolean slowEffect;
     private TimeHelper timeHelper;
@@ -72,14 +65,6 @@ public class GameScreen extends ScreenAdapter {
         this.bossBars = new ArrayList<>();
 
         this.shapeRenderer = new ShapeRenderer();
-
-        this.generator = new FreeTypeFontGenerator(Gdx.files.internal("font.ttf"));
-        this.parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        this.parameter.size = 30;
-        this.parameter.borderWidth = 1;
-        this.parameter.borderColor = Color.BLACK;
-        this.parameter.color = Color.WHITE;
-        this.bitmap = generator.generateFont(parameter);
 
     }
 
@@ -156,13 +141,13 @@ public class GameScreen extends ScreenAdapter {
 
         this.boss.render(batch);
 
-        bitmap.draw(batch, "" + (3f - playerProjectile.getDelayShoot() <= 0 ? "Ready!" : Math.ceil(3f - playerProjectile.getDelayShoot()) + " s"), 100, HyperShapes.INSTANCE.getScreenHeight() - 100);
+        FontHelper.write(batch, (3f - playerProjectile.getDelayShoot() <= 0 ? "Ready!" : Math.ceil(3f - playerProjectile.getDelayShoot()) + " s"), new Vector2(100, HyperShapes.INSTANCE.getScreenHeight() - 100), 30);
 
         if (this.boss.getStage() == 2) {
-            bitmap.draw(batch, "" + Math.round(boss.getSecondStageTime()) + " s", HyperShapes.INSTANCE.getScreenWidth()/2, HyperShapes.INSTANCE.getScreenHeight() - 100);
+            FontHelper.write(batch, (Math.round(boss.getSecondStageTime()) + " s"), new Vector2(HyperShapes.INSTANCE.getScreenWidth()/2, HyperShapes.INSTANCE.getScreenHeight() - 100), 30);
         }
 
-        bitmap.draw(batch, "Pontos: " + (int) Math.pow(player.getScore(), HyperShapes.INSTANCE.getDifficulty()), HyperShapes.INSTANCE.getScreenWidth() - 225, HyperShapes.INSTANCE.getScreenHeight() - 100);
+        FontHelper.write(batch, ("Pontos: " + (int) Math.pow(player.getScore(), HyperShapes.INSTANCE.getDifficulty())), new Vector2(HyperShapes.INSTANCE.getScreenWidth() - 225, HyperShapes.INSTANCE.getScreenHeight() - 100), 30);
 
         batch.end();
 
@@ -193,8 +178,6 @@ public class GameScreen extends ScreenAdapter {
         world.dispose();
         box2DDebugRenderer.dispose();
         shapeRenderer.dispose();
-        bitmap.dispose();
-        generator.dispose();
         batch.dispose();
     }
 
@@ -230,7 +213,4 @@ public class GameScreen extends ScreenAdapter {
         return bossBars;
     }
 
-    public OrthographicCamera getCamera() {
-        return this.camera;
-    }
 }
