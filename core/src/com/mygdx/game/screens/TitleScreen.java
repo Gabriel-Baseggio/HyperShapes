@@ -70,13 +70,13 @@ public class TitleScreen extends ScreenAdapter {
         batch.draw(new Texture("patinho.png"), HyperShapes.INSTANCE.getScreenWidth() / 2 - 96, HyperShapes.INSTANCE.getScreenHeight() / 2, 64 , 64);
         batch.draw(new Texture("patinho.png"), HyperShapes.INSTANCE.getScreenWidth() / 2 - 80 , HyperShapes.INSTANCE.getScreenHeight() / 2 - 200, 128 , 128);
         
-        bitmapTitle.draw(batch, "Hyper Shapes", HyperShapes.INSTANCE.getScreenWidth() / 2 - 210, HyperShapes.INSTANCE.getScreenHeight() / 2);
+        bitmapTitle.draw(batch, "Hyper Shapes", HyperShapes.INSTANCE.getScreenWidth() / 2 - 210, HyperShapes.INSTANCE.getScreenHeight() / 2 - bitmap.getCapHeight());
 
         bitmap.draw(batch, "Pressione ESC para sair", 10, HyperShapes.INSTANCE.getScreenHeight() - bitmap.getCapHeight());
 
-        bitmap.draw(batch, "Pressione 1 para jogar na dificuldade muito fácil", 10, bitmap.getCapHeight()*5);
-        bitmap.draw(batch, "Pressione 2 para jogar na dificuldade levemente fácil", 10, bitmap.getCapHeight()*3);
-        bitmap.draw(batch, "Pressione 3 para jogar na dificuldade fácil", 10, bitmap.getCapHeight());
+        bitmap.draw(batch, "Pressione 1 para jogar na dificuldade muito fácil", 10, 30 + bitmap.getCapHeight()*5);
+        bitmap.draw(batch, "Pressione 2 para jogar na dificuldade levemente fácil", 10, 20 + bitmap.getCapHeight()*3);
+        bitmap.draw(batch, "Pressione 3 para jogar na dificuldade fácil", 10, 10 + bitmap.getCapHeight());
 
 		batch.end();
 	}
