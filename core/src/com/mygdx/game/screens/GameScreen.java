@@ -27,7 +27,6 @@ public class GameScreen extends ScreenAdapter {
     private SpriteBatch batch;
     private ShapeRenderer shapeRenderer;
     private World world;
-    private Box2DDebugRenderer box2DDebugRenderer;
     private GameContactListener gameContactListener;
 
     private Player player;
@@ -51,7 +50,6 @@ public class GameScreen extends ScreenAdapter {
         this.camera.position.set(new Vector3(HyperShapes.INSTANCE.getScreenWidth() / 2, HyperShapes.INSTANCE.getScreenHeight() / 2, 0));
         this.batch = new SpriteBatch();
         this.world = new World(new Vector2(0, 0), false);
-        this.box2DDebugRenderer = new Box2DDebugRenderer();
         this.gameContactListener = new GameContactListener(this);
         this.world.setContactListener(this.gameContactListener);
 
@@ -134,10 +132,6 @@ public class GameScreen extends ScreenAdapter {
 
         batch.setProjectionMatrix(camera.combined);
 
-        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-            Gdx.app.exit();
-        }
-
     }
 
     @Override
@@ -187,14 +181,11 @@ public class GameScreen extends ScreenAdapter {
         this.wallLeft.render(shapeRenderer);
 
         shapeRenderer.end();
-
-        this.box2DDebugRenderer.render(world, camera.combined.scl(PPM));
     }
 
     @Override
     public void dispose() {
         world.dispose();
-        box2DDebugRenderer.dispose();
         shapeRenderer.dispose();
         bitmap.dispose();
         generator.dispose();
