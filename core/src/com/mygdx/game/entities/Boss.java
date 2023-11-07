@@ -20,28 +20,28 @@ import static com.mygdx.game.helper.DifficultyHelper.defineDifficulty;
 public class Boss {
 
     /**
-     * Propriedade do tipo Body que representa o corpo físico do Boss no mundo do jogo.
+     * Propriedade do tipo Body que representa o corpo físico no mundo do jogo.
      */
     private Body body;
     /**
-     * Propriedade do tipo float que representa a posição horizontal do corpo do Boss.
+     * Propriedade do tipo float que representa a posição horizontal do corpo.
      */
     private float x;
     /**
-     * Propriedade do tipo float que representa a posição vertical do corpo do Boss.
+     * Propriedade do tipo float que representa a posição vertical do corpo.
      */
     private float y;
     /**
-     * Propriedade do tipo int que representa o diâmetro do corpo do Boss.
+     * Propriedade do tipo int que representa o diâmetro do corpo.
      */
     private int diameter;
     /**
-     * Propriedade do tipo AnimationHelper para fazer uma animação de acerto no Boss.
+     * Propriedade do tipo AnimationHelper para fazer uma animação de acerto.
      */
     private AnimationHelper animationHit;
 
     /**
-     * Propriedade do tipo Texture que define a imagem a ser desenhada pelo Boss na tela do jogo.
+     * Propriedade do tipo Texture que define a imagem a ser desenhada na tela do jogo.
      */
     private Texture texture;
     /**
