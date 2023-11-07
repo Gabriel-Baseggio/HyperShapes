@@ -91,10 +91,10 @@ public class Boss {
     /**
      * Construtor da classe para poder inicializar as propriedades do Boss e usar os métodos iniciais.
      *
-     * @param x (float) Posição horizontal do corpo do Boss.
-     * @param y (float) Posição vertical do corpo do Boss.
-     * @param diameter (int) O diâmetro do corpo do Boss.
-     * @param texture (String) O nome do arquivo da textura do corpo do Boss.
+     * @param x          (float) Posição horizontal do corpo do Boss.
+     * @param y          (float) Posição vertical do corpo do Boss.
+     * @param diameter   (int) O diâmetro do corpo do Boss.
+     * @param texture    (String) O nome do arquivo da textura do corpo do Boss.
      * @param gameScreen (GameScreen) A tela onde o Boss será spawnado.
      */
     public Boss(float x, float y, int diameter, String texture, GameScreen gameScreen) {
@@ -153,13 +153,13 @@ public class Boss {
                 barsCounter = 0;
             }
 
-            if (time >= defineDifficulty(1.5f) && secondStageTime >= 2 && secondStageTime <= defineDifficulty(1.5f)*25+2) {
+            if (time >= defineDifficulty(1.5f) && secondStageTime >= 2 && secondStageTime <= defineDifficulty(1.5f) * 25 + 2) {
                 int newPattern;
                 do {
                     newPattern = (int) Math.floor((Math.random() * 4 + 1));
                 } while (newPattern == prevPattern[0] || newPattern == prevPattern[1]);
                 prevPattern[iPattern] = newPattern;
-                if (iPattern < prevPattern.length-1) {
+                if (iPattern < prevPattern.length - 1) {
                     iPattern++;
                 } else {
                     iPattern = 0;
@@ -169,9 +169,9 @@ public class Boss {
                 time = 0;
             }
 
-            if (secondStageTime >= defineDifficulty(1.5f)*25+5) {
+            if (secondStageTime >= defineDifficulty(1.5f) * 25 + 5) {
                 this.setStage(1);
-                body.setTransform(HyperShapes.INSTANCE.getScreenWidth()/2/PPM, HyperShapes.INSTANCE.getScreenHeight()/2/PPM, 0);
+                body.setTransform(HyperShapes.INSTANCE.getScreenWidth() / 2 / PPM, HyperShapes.INSTANCE.getScreenHeight() / 2 / PPM, 0);
                 barsCounter = 0;
                 secondStageTime = 0;
                 time = 0;
@@ -202,16 +202,16 @@ public class Boss {
     /**
      * Spawna projéteis em um padrão circular ao redor do Boss.
      *
-     * @param pattern (int) O padrão que deve ser spawnado de projéteis.
+     * @param pattern        (int) O padrão que deve ser spawnado de projéteis.
      * @param numProjectiles (int) O número de projéteis a serem spawnados.
-     * @param circleRadius (int) O raio do padrão circular.
+     * @param circleRadius   (int) O raio do padrão circular.
      */
     public void spawnProjectilesInCircle(int pattern, int numProjectiles, int circleRadius) {
-        float angleStep =  360f / numProjectiles;
+        float angleStep = 360f / numProjectiles;
 
-        float startingAngle =  0;
+        float startingAngle = 0;
         if (pattern == 2) {
-            startingAngle = 360f / (numProjectiles*2);
+            startingAngle = 360f / (numProjectiles * 2);
         }
 
         for (int i = 0; i < numProjectiles; i++) {

@@ -55,10 +55,10 @@ public class BossProjectile {
     /**
      * Inicializa um novo objeto BossProjectile com os parâmetros especificados.
      *
-     * @param x A coordenada X da posição inicial do projétil.
-     * @param y A coordenada Y da posição inicial do projétil.
-     * @param angX O ângulo de direção X do projétil.
-     * @param angY O ângulo de direção Y do projétil.
+     * @param x          A coordenada X da posição inicial do projétil.
+     * @param y          A coordenada Y da posição inicial do projétil.
+     * @param angX       O ângulo de direção X do projétil.
+     * @param angY       O ângulo de direção Y do projétil.
      * @param gameScreen A GameScreen à qual o projétil pertence.
      */
     public BossProjectile(float x, float y, float angX, float angY, GameScreen gameScreen) {
@@ -95,7 +95,7 @@ public class BossProjectile {
     public void render(ShapeRenderer shape) {
         shape.set(ShapeRenderer.ShapeType.Filled);
         shape.setColor(Color.GREEN);
-        shape.ellipse(x + diameter/2, y + diameter/2, diameter, diameter);
+        shape.ellipse(x + diameter / 2, y + diameter / 2, diameter, diameter);
     }
 
     /**
@@ -115,6 +115,7 @@ public class BossProjectile {
     public boolean destroy() {
         return destroy;
     }
+
     /**
      * Método utilizado para retornar a posição horizontal do corpo.
      *
@@ -123,6 +124,7 @@ public class BossProjectile {
     public float getX() {
         return body.getPosition().x;
     }
+
     /**
      * Método utilizado para retornar a posição vertical do corpo.
      *
@@ -131,6 +133,7 @@ public class BossProjectile {
     public float getY() {
         return body.getPosition().y;
     }
+
     /**
      * Método utilizado para retornar o corpo.
      *
