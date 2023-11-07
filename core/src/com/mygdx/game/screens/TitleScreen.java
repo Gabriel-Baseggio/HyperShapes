@@ -12,15 +12,41 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.mygdx.game.HyperShapes;
 
+/**
+ * Classe que representa a tela de título do jogo.
+ * Extende a classe ScreenAdapter da biblioteca LibGDX para poder utilizar de seus recursos.
+ */
 public class TitleScreen extends ScreenAdapter {
+	/**
+	 * Propriedade do tipo OrthographicCamera que representa a câmera do jogo.
+	 */
 	private OrthographicCamera camera;
+	/**
+	 * Propriedade do tipo SpriteBatch que renderiza os sprites utilizados no jogo.
+	 */
 	private SpriteBatch batch;
 
+	/**
+	 * Propriedade do tipo FreeTypeFontGenerator que auxilia na criação de fontes.
+	 */
 	private FreeTypeFontGenerator generator;
+	/**
+	 * Propriedade do tipo FreeTypeFontGenerator.FreeTypeFontParameter que auxilia na criação de fontes.
+	 */
     private FreeTypeFontGenerator.FreeTypeFontParameter parameter;
+	/**
+	 * Propriedade do tipo BitmapFont que auxilia na criação de fontes de título.
+	 */
     private BitmapFont bitmapTitle;
+	/**
+	 * Propriedade do tipo BitmapFont que auxilia na criação de fontes de texto normal.
+	 */
     private BitmapFont bitmap;
-	
+
+	/**
+	 * Construtor da classe que atribui os valores inicias para suas variáveis.
+	 * @param camera (OrthographicCamera)
+	 */
 	public TitleScreen(OrthographicCamera camera) {
 		this.camera = camera;
 		this.batch = new SpriteBatch();
@@ -37,7 +63,10 @@ public class TitleScreen extends ScreenAdapter {
 		this.bitmap = generator.generateFont(parameter);
 
 	}
-	
+
+	/**
+	 * Método que será chamado a cada frame do jogo para fazer uma atualização do que é necessário e verificar inputs
+	 */
 	public void update() {
 		if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)) {
 			HyperShapes.INSTANCE.setScreen(new GameScreen(this.camera));
@@ -57,6 +86,10 @@ public class TitleScreen extends ScreenAdapter {
 		}
 	}
 
+	/**
+	 * Método que é chamado a cada frame do jogo, chamando o método update como também fazendo as renderizações na tela.
+	 * @param delta (float) o tempo decorrido desde a última atualização
+	 */
 	@Override
 	public void render(float delta) {
 		update();
@@ -81,6 +114,9 @@ public class TitleScreen extends ScreenAdapter {
 		batch.end();
 	}
 
+	/**
+	 * Chamado quando esta tela deveria liberar todos os recursos.
+	 */
 	@Override
 	public void dispose() {
 		bitmap.dispose();
