@@ -14,28 +14,89 @@ import static com.mygdx.game.helper.ContactType.BOSS;
 import static com.mygdx.game.helper.ContactType.PLAYERPROJECTILE;
 import static com.mygdx.game.helper.DifficultyHelper.defineDifficulty;
 
+/**
+ * Classe que define as informações e ações do Boss no jogo.
+ */
 public class Boss {
 
+    /**
+     * Propriedade do tipo Body que representa o corpo físico do Boss no mundo do jogo.
+     */
     private Body body;
-    private float x, y;
+    /**
+     * Propriedade do tipo float que representa a posição horizontal do corpo do Boss.
+     */
+    private float x;
+    /**
+     * Propriedade do tipo float que representa a posição vertical do corpo do Boss.
+     */
+    private float y;
+    /**
+     * Propriedade do tipo int que representa o diâmetro do corpo do Boss.
+     */
     private int diameter;
+    /**
+     * Propriedade do tipo AnimationHelper para fazer uma animação de acerto no Boss.
+     */
     private AnimationHelper animationHit;
 
+    /**
+     * Propriedade do tipo Texture que define a imagem a ser desenhada pelo Boss na tela do jogo.
+     */
     private Texture texture;
+    /**
+     * Propriedade do tipo GameScreen que representa a tela de jogo, permitindo que seja utilizada seus métodos.
+     */
     private GameScreen gameScreen;
 
+    /**
+     * Propriedade do tipo boolean que define se o Boss foi acertado ou não.
+     */
     private boolean wasHit;
+    /**
+     * Propriedade do tipo float que define o tempo desde que o Boss foi acertado, para que ele não possa ser acertado.
+     */
     private float hitDelay;
+    /**
+     * Propriedade do tipo int que define estágio que o Boss está.
+     */
     private int stage;
+    /**
+     * Propriedade do tipo float que define o tempo decorrido com o Boss no jogo.
+     */
     private float time;
+    /**
+     * Propriedade do tipo boolean que define qual padrão de ataque será usado pelo Boss no estágio 1.
+     */
     private boolean secondPattern;
 
+    /**
+     * Propriedade do tipo float que define o tempo decorrido no estágio 2 do Boss.
+     */
     private float secondStageTime;
+    /**
+     * Propriedade do tipo int que define quantas barras já foram spawnadas.
+     */
     private int barsCounter;
+    /**
+     * Propriedade do tipo int[] que define os padrões de barras já spawnados anteriormente.
+     */
     private int[] prevPattern;
+    /**
+     * Propriedade do tipo int que define o índice que deve ser alterado no vetor de padrões anteriores.
+     */
     private int iPattern;
 
 
+    /**
+     * Construtor da classe para poder inicializar as propriedades do Boss e usar os métodos iniciais.
+     *
+     * @param x (float) Posição horizontal do corpo do Boss.
+     * @param y (float) Posição vertical do corpo do Boss.
+     * @param diameter (int) O diâmetro do corpo do Boss.
+     * @param texture (String) O nome do arquivo da textura do corpo do Boss.
+     * @param gameScreen (GameScreen) A tela onde o Boss será spawnado.
+     */
     public Boss(float x, float y, int diameter, String texture, GameScreen gameScreen) {
         this.x = x;
         this.y = y;
@@ -60,6 +121,11 @@ public class Boss {
 
     }
 
+    /**
+     * Faz as atualizações das propriedades do Boss e as definições de acordo com estado e tempo de jogo.
+     *
+     * @param deltaTime (float) O tempo decorrido desde a última atualização.
+     */
     public void update(float deltaTime) {
         x = body.getPosition().x * PPM;
         y = body.getPosition().y * PPM;
@@ -74,7 +140,7 @@ public class Boss {
                 pattern = 2;
                 secondPattern = false;
             }
-            spawnProjectilesInCircle(pattern, x, y, 17, diameter - 50, gameScreen);
+            spawnProjectilesInCircle(pattern, 17, diameter - 50);
             time = 0;
         }
 
@@ -115,6 +181,11 @@ public class Boss {
 
     }
 
+    /**
+     * Faz as renderizações de imagens no batch, dependendo se foi acertado ou não.
+     *
+     * @param batch (SpriteBatch) O SpriteBatch usado para renderizar as imagens.
+     */
     public void render(SpriteBatch batch) {
         if (wasHit) {
             animationHit.render(batch, x, y);
@@ -128,7 +199,14 @@ public class Boss {
         }
     }
 
-    public static void spawnProjectilesInCircle(int pattern, float centerX, float centerY, int numProjectiles, int circleRadius, GameScreen gameScreen) {
+    /**
+     * Spawna projéteis em um padrão circular ao redor do Boss.
+     *
+     * @param pattern (int) O padrão que deve ser spawnado de projéteis.
+     * @param numProjectiles (int) O número de projéteis a serem spawnados.
+     * @param circleRadius (int) O raio do padrão circular.
+     */
+    public void spawnProjectilesInCircle(int pattern, int numProjectiles, int circleRadius) {
         float angleStep =  360f / numProjectiles;
 
         float startingAngle =  0;
@@ -137,15 +215,20 @@ public class Boss {
         }
 
         for (int i = 0; i < numProjectiles; i++) {
-            float x = centerX + circleRadius * MathUtils.cosDeg(startingAngle);
-            float y = centerY + circleRadius * MathUtils.sinDeg(startingAngle);
+            float x = this.x + circleRadius * MathUtils.cosDeg(startingAngle);
+            float y = this.y + circleRadius * MathUtils.sinDeg(startingAngle);
 
-            gameScreen.getBossProjectiles().add(new BossProjectile(x, y, MathUtils.cosDeg(startingAngle), MathUtils.sinDeg(startingAngle), gameScreen));
+            this.gameScreen.getBossProjectiles().add(new BossProjectile(x, y, MathUtils.cosDeg(startingAngle), MathUtils.sinDeg(startingAngle), this.gameScreen));
 
             startingAngle += angleStep;
         }
     }
 
+    /**
+     * Spawna barras de acordo com os padrões da segunda fase do Boss.
+     *
+     * @param pattern (int) O padrão de barras que deve ser spawnado.
+     */
     public void spawnBars(int pattern) {
         int w1 = Math.round(HyperShapes.INSTANCE.getScreenWidth() * 0.6f);
         int w2 = Math.round(HyperShapes.INSTANCE.getScreenWidth() * 0.4f);
@@ -176,30 +259,65 @@ public class Boss {
 
     }
 
+    /**
+     * Define a propriedade que indica se o Boss foi atingido.
+     *
+     * @param wasHit (boolean)
+     */
     public void setWasHit(boolean wasHit) {
         this.wasHit = wasHit;
     }
 
+    /**
+     * Método utilizado para retornar se o Boss foi atingido.
+     *
+     * @return wasHit (boolean)
+     */
     public boolean getWasHit() {
         return wasHit;
     }
 
+    /**
+     * Método utilizado para retornar o delay para atingir o Boss novamente.
+     *
+     * @return hitDelay (double)
+     */
     public double getHitDelay() {
         return hitDelay;
     }
 
+    /**
+     * Define a propriedade que indica o estágio do Boss.
+     *
+     * @param stage (int)
+     */
     public void setStage(int stage) {
         this.stage = stage;
     }
 
+    /**
+     * Método utilizado para retornar o corpo do Boss.
+     *
+     * @return body (Body)
+     */
     public Body getBody() {
         return body;
     }
 
+    /**
+     * Método utilizado para retornar o estágio do Boss.
+     *
+     * @return stage (int)
+     */
     public int getStage() {
         return this.stage;
     }
 
+    /**
+     * Método utilizado para retornar o tempo decorrido no segundo estágio do Boss.
+     *
+     * @return secondStageTime (double)
+     */
     public double getSecondStageTime() {
         return this.secondStageTime;
     }
