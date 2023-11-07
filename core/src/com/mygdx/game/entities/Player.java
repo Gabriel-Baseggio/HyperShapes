@@ -156,7 +156,9 @@ public class Player {
      *
      * @param score A nova pontuação do jogador.
      */
-    public void setScore(int score) { this.score = score; }
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     /**
      * Define que o jogador perdeu e atualiza a pontuação final, considerando a dificuldade.

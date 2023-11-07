@@ -130,11 +130,11 @@ public class PlayerProjectile extends InputAdapter {
     /**
      * Renderiza o projétil na tela usando um SpriteBatch e a textura fornecida.
      *
-     * @param batch O SpriteBatch usado para renderização.
+     * @param batch   O SpriteBatch usado para renderização.
      * @param textura A textura usada para representar o projétil.
      */
     public void render(SpriteBatch batch, Texture textura) {
-        batch.draw(textura, position.x + (diameter/2), position.y + (diameter/2), diameter, diameter);
+        batch.draw(textura, position.x + (diameter / 2), position.y + (diameter / 2), diameter, diameter);
     }
 
     /**
@@ -181,8 +181,8 @@ public class PlayerProjectile extends InputAdapter {
     /**
      * Aplica uma força para direcionar o projétil na direção do mouse.
      *
-     * @param mouseX A coordenada X da posição do mouse.
-     * @param mouseY A coordenada Y da posição do mouse.
+     * @param mouseX    A coordenada X da posição do mouse.
+     * @param mouseY    A coordenada Y da posição do mouse.
      * @param deltaTime O tempo decorrido desde a última atualização.
      */
     public void applyForceToFollowMouse(float mouseX, float mouseY, float deltaTime) {
@@ -226,7 +226,7 @@ public class PlayerProjectile extends InputAdapter {
      * @param screenX A coordenada X do toque liberado na tela.
      * @param screenY A coordenada Y do toque liberado na tela.
      * @param pointer O ponteiro associado ao evento de liberação de toque.
-     * @param button O botão do mouse associado ao evento de liberação de toque.
+     * @param button  O botão do mouse associado ao evento de liberação de toque.
      * @return Verdadeiro se o evento de liberação de toque foi manipulado com sucesso; falso caso contrário.
      */
     @Override

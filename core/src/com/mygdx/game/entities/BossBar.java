@@ -17,7 +17,8 @@ import static com.mygdx.game.helper.DifficultyHelper.defineDifficulty;
 public class BossBar {
 
     /**
-     * Propriedade do tipo Body que representa o corpo físico no mundo do jogo.     */
+     * Propriedade do tipo Body que representa o corpo físico no mundo do jogo.
+     */
     private Body body;
     /**
      * Propriedade do tipo float que representa a posição horizontal do corpo.
@@ -51,11 +52,11 @@ public class BossBar {
     /**
      * Construtor da classe para poder inicializar as propriedades.
      *
-     * @param x (float) Posição horizontal do corpo.
-     * @param y (float) Posição vertical do corpo.
-     * @param velY (float) Direção vertical do corpo.
-     * @param width (int) Largura do corpo.
-     * @param height (int) Altura do corpo.
+     * @param x          (float) Posição horizontal do corpo.
+     * @param y          (float) Posição vertical do corpo.
+     * @param velY       (float) Direção vertical do corpo.
+     * @param width      (int) Largura do corpo.
+     * @param height     (int) Altura do corpo.
      * @param gameScreen (GameScreen) Tela onde serão spawnadas as barras.
      */
     public BossBar(float x, float y, float velY, int width, int height, GameScreen gameScreen) {
@@ -102,9 +103,10 @@ public class BossBar {
      *
      * @return destroy (boolean)
      */
-    public boolean destroy(){
+    public boolean destroy() {
         return destroy;
     }
+
     /**
      * Método utilizado para retornar o corpo.
      *
@@ -113,6 +115,7 @@ public class BossBar {
     public Body getBody() {
         return body;
     }
+
     /**
      * Método utilizado para retornar a posição horizontal do corpo.
      *
@@ -121,6 +124,7 @@ public class BossBar {
     public float getX() {
         return body.getPosition().x;
     }
+
     /**
      * Método utilizado para retornar a posição vertical do corpo.
      *
@@ -129,6 +133,7 @@ public class BossBar {
     public float getY() {
         return body.getPosition().y;
     }
+
     /**
      * Método utilizado para definir se a barra deve ser destruída ou não.
      *
