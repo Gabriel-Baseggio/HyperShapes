@@ -7,14 +7,29 @@ import com.mygdx.game.entities.BossProjectile;
 
 import static com.mygdx.game.helper.ContactType.*;
 
+/**
+ * Classe que auxilia na tomada de decisões quando ocorre uma colisão no jogo.
+ * Ela é implementada pela classe ContactListener da biblioteca LibGDX para tornar possível o reconhecimento do contato.
+ */
 public class GameContactListener implements ContactListener {
 
+    /**
+     * Propriedade do tipo GameScreen que representa a tela de jogo, permitindo que seja utilizada seus métodos.
+     */
     private GameScreen gameScreen;
 
+    /**
+     * Construtor da classe para poder setar a variável gameScreen.
+     * @param gameScreen (GameScreen)
+     */
     public GameContactListener(GameScreen gameScreen) {
         this.gameScreen = gameScreen;
     }
 
+    /**
+     * Método para fazer verificações de qual colisão ocorreu e como tratá-las quando elas iniciam.
+     * @param contact (Contact) representa o contato ocorrido
+     */
     @Override
     public void beginContact(Contact contact) {
         Fixture a = contact.getFixtureA();
@@ -97,6 +112,10 @@ public class GameContactListener implements ContactListener {
 
     }
 
+    /**
+     * Método parecido com o beginContact, porém ele é chamado quando uma colisão termina.
+     * @param contact (Contact) representa o contato ocorrido
+     */
     @Override
     public void endContact(Contact contact) {
         Fixture a = contact.getFixtureA();
@@ -115,11 +134,21 @@ public class GameContactListener implements ContactListener {
         }
     }
 
+    /**
+     * Método da interface implementada que não foi utilizada durante o projeto.
+     * @param contact (Contact)
+     * @param oldManifold (Manifold)
+     */
     @Override
     public void preSolve(Contact contact, Manifold oldManifold) {
 
     }
 
+    /**
+     * Método da interface implementada que não foi utilizada durante o projeto.
+     * @param contact (Contact)
+     * @param impulse (ContactImpulse)
+     */
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
 

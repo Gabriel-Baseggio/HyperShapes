@@ -12,7 +12,7 @@ public class TimeHelper {
     private float timeScale = 1.0f;
 
     /**
-     * Método que é utilizado para alcançar o encapsulamento da propriedade timeScale, mudando o valor dela conforme o parâmetro
+     * Método que é utilizado para alcançar o encapsulamento da propriedade timeScale, mudando o valor dela conforme o parâmetro.
      * @param scale (float)
      */
     public void setTimeScale(float scale) {
