@@ -61,14 +61,6 @@ public class HyperShapes extends Game {
     }
 
     /**
-     * Método que retorna a câmera do jogo.
-     * @return camera (OrthographicCamera)
-     */
-    public OrthographicCamera getCamera() {
-        return this.camera;
-    }
-
-    /**
      * Método que retorna a largura da tela.
      * @return screenWidth (int)
      */
