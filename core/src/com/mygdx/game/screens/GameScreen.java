@@ -21,30 +21,97 @@ import java.util.Iterator;
 
 import static com.mygdx.game.helper.Constants.PPM;
 
+/**
+ * Classe que representa a tela do jogo.
+ * Extende a classe ScreenAdapter da biblioteca LibGDX para poder utilizar de seus recursos.
+ */
 public class GameScreen extends ScreenAdapter {
-
+    /**
+     * Propriedade do tipo OrthographicCamera que representa a câmera do jogo.
+     */
     private OrthographicCamera camera;
+    /**
+     * Propriedade do tipo SpriteBatch que renderiza os sprites utilizados no jogo.
+     */
     private SpriteBatch batch;
+    /**
+     * Propriedade do tipo ShapeRenderer que renderiza formas geométricas na tela.
+     */
     private ShapeRenderer shapeRenderer;
+    /**
+     * Propriedade do tipo World que representa o mundo onde os corpos estarão.
+     */
     private World world;
+    /**
+     * Propriedade do tipo GameContactListener que é utilizada para tratar colisões.
+     */
     private GameContactListener gameContactListener;
 
+    /**
+     * Propriedade do tipo Player que representa o jogador.
+     */
     private Player player;
+    /**
+     * Propriedade do tipo PlayerProjectile que representa o projétil do jogador.
+     */
     private PlayerProjectile playerProjectile;
 
+    /**
+     * Propriedade do tipo Boss que representar o chefe do jogo.
+     */
     private Boss boss;
+    /**
+     * Propriedade que é um lista do tipo BossProjectile que armazena todos os projéteis do chefe.
+     */
     private ArrayList<BossProjectile> bossProjectiles;
+    /**
+     * Propriedade que é um lista do tipo BossBar que armazena todos as barras da segunda fase do chefe.
+     */
     private ArrayList<BossBar> bossBars;
 
-    private Wall wallTop, wallRight, wallBottom, wallLeft;
+    /**
+     * Propriedade do tipo Wall que representa a parede superior da sala.
+     */
+    private Wall wallTop;
+    /**
+     * Propriedade do tipo Wall que representa a parede do canto direito da sala.
+     */
+    private Wall wallRight;
+    /**
+     * Propriedade do tipo Wall que representa a parede inferior da sala.
+     */
+    private Wall wallBottom;
+    /**
+     * Propriedade do tipo Wall que representa a parede do canto esquerdo da sala.
+     */
+    private Wall wallLeft;
 
+    /**
+     * Propriedade do tipo FreeTypeFontGenerator que auxilia na criação de fontes.
+     */
     private FreeTypeFontGenerator generator;
+    /**
+     * Propriedade do tipo FreeTypeFontGenerator.FreeTypeFontParameter que auxilia na criação de fontes.
+     */
     private FreeTypeFontGenerator.FreeTypeFontParameter parameter;
+    /**
+     * Propriedade do tipo BitmapFont que auxilia na criação de fontes.
+     */
     private BitmapFont bitmap;
 
+    /**
+     * Propriedade do tipo boolean que indica se o efeito de slow motion está ativo.
+     */
     private boolean slowEffect;
+    /**
+     * Propriedade do tipo TimeHelper que é utilizada para auxiliar no cálculo de tempo real passado no mundo.
+     */
     private TimeHelper timeHelper;
 
+    /**
+     * Construtor da classe que atribui os valores inicias para suas variáveis.
+     * @param camera (OrthographicCamera)
+     */
     public GameScreen(OrthographicCamera camera) {
         this.camera = camera;
         this.camera.position.set(new Vector3(HyperShapes.INSTANCE.getScreenWidth() / 2, HyperShapes.INSTANCE.getScreenHeight() / 2, 0));
@@ -80,6 +147,9 @@ public class GameScreen extends ScreenAdapter {
 
     }
 
+    /**
+     * Método que será chamado a cada frame do jogo para fazer uma atualização do que é necessário e verificar inputs
+     */
     public void update() {
         world.step(1 / 60f, 6, 2);
 
@@ -134,6 +204,10 @@ public class GameScreen extends ScreenAdapter {
 
     }
 
+    /**
+     * Método que é chamado a cada frame do jogo, chamando o método update como também fazendo as renderizações na tela.
+     * @param delta (float) o tempo decorrido desde a última atualização
+     */
     @Override
     public void render(float delta) {
         update();
@@ -183,6 +257,9 @@ public class GameScreen extends ScreenAdapter {
         shapeRenderer.end();
     }
 
+    /**
+     * Chamado quando esta tela deveria liberar todos os recursos.
+     */
     @Override
     public void dispose() {
         world.dispose();
@@ -192,39 +269,67 @@ public class GameScreen extends ScreenAdapter {
         batch.dispose();
     }
 
+    /**
+     * Método que retorna o mundo do jogo.
+     * @return world (World)
+     */
     public World getWorld() {
         return this.world;
     }
 
+    /**
+     * Método que retorna o jogador.
+     * @return player (Player)
+     */
     public Player getPlayer() {
         return player;
     }
 
+    /**
+     * Método que retorna o projétil do jogador.
+     * @return playerProjectile (PlayerProjectile)
+     */
     public PlayerProjectile getPlayerProjectile() {
         return playerProjectile;
     }
 
+    /**
+     * Método que retorna o chefe do jogo.
+     * @return boss (Boss)
+     */
     public Boss getBoss() {
         return boss;
     }
 
+    /**
+     * Método que retorna o mundo do jogo.
+     * @return bossProjectiles (lista do tipo BossProjectile)
+     */
     public ArrayList<BossProjectile> getBossProjectiles() {
         return bossProjectiles;
     }
 
+    /**
+     * Método que atribui um novo valor a variavel slowEffect.
+     * @param slowEffect (boolean)
+     */
     public void setSlowEffect(boolean slowEffect) {
         this.slowEffect = slowEffect;
     }
 
+    /**
+     * Método que retorna o timeHelper.
+     * @return timeHelper (TimeHelper)
+     */
     public TimeHelper getTimeHelper() {
         return timeHelper;
     }
 
+    /**
+     * Método que retorna o mundo do jogo.
+     * @return world (World)
+     */
     public ArrayList<BossBar> getBossBars() {
         return bossBars;
-    }
-
-    public OrthographicCamera getCamera() {
-        return this.camera;
     }
 }
