@@ -110,6 +110,7 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * Construtor da classe que atribui os valores inicias para suas variáveis.
+     *
      * @param camera (OrthographicCamera)
      */
     public GameScreen(OrthographicCamera camera) {
@@ -126,10 +127,10 @@ public class GameScreen extends ScreenAdapter {
         this.slowEffect = false;
         this.timeHelper = new TimeHelper();
 
-        this.wallTop = new Wall(HyperShapes.INSTANCE.getScreenWidth()/2, HyperShapes.INSTANCE.getScreenHeight() - 16, HyperShapes.INSTANCE.getScreenWidth(), 32, "patinho.png", this);
-        this.wallRight = new Wall(HyperShapes.INSTANCE.getScreenWidth() - 16, HyperShapes.INSTANCE.getScreenHeight()/2, 32, HyperShapes.INSTANCE.getScreenHeight(), "patinho.png", this);
-        this.wallBottom = new Wall(HyperShapes.INSTANCE.getScreenWidth()/2, 16, HyperShapes.INSTANCE.getScreenWidth(), 32, "patinho.png", this);
-        this.wallLeft = new Wall(16, HyperShapes.INSTANCE.getScreenHeight()/2, 32, HyperShapes.INSTANCE.getScreenHeight(), "patinho.png", this);
+        this.wallTop = new Wall(HyperShapes.INSTANCE.getScreenWidth() / 2, HyperShapes.INSTANCE.getScreenHeight() - 16, HyperShapes.INSTANCE.getScreenWidth(), 32, "patinho.png", this);
+        this.wallRight = new Wall(HyperShapes.INSTANCE.getScreenWidth() - 16, HyperShapes.INSTANCE.getScreenHeight() / 2, 32, HyperShapes.INSTANCE.getScreenHeight(), "patinho.png", this);
+        this.wallBottom = new Wall(HyperShapes.INSTANCE.getScreenWidth() / 2, 16, HyperShapes.INSTANCE.getScreenWidth(), 32, "patinho.png", this);
+        this.wallLeft = new Wall(16, HyperShapes.INSTANCE.getScreenHeight() / 2, 32, HyperShapes.INSTANCE.getScreenHeight(), "patinho.png", this);
 
         this.boss = new Boss(HyperShapes.INSTANCE.getScreenWidth() / 2, HyperShapes.INSTANCE.getScreenHeight() / 2, 192, "PrimeiroBoss.png", this);
         this.bossProjectiles = new ArrayList<>();
@@ -155,7 +156,7 @@ public class GameScreen extends ScreenAdapter {
 
         this.camera.update();
 
-        if (this.player.getScore()%3 == 0 && this.player.getScore()%6 != 0 ) {
+        if (this.player.getScore() % 3 == 0 && this.player.getScore() % 6 != 0) {
             this.boss.setStage(2);
             Iterator<BossProjectile> iterator3 = bossProjectiles.iterator();
             while (iterator3.hasNext()) {
@@ -206,6 +207,7 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * Método que é chamado a cada frame do jogo, chamando o método update como também fazendo as renderizações na tela.
+     *
      * @param delta (float) o tempo decorrido desde a última atualização
      */
     @Override
@@ -222,7 +224,7 @@ public class GameScreen extends ScreenAdapter {
         if (playerProjectile.getCanShoot() && playerProjectile.getDelayShoot() > 3f) {
             this.playerProjectile.render(batch, new Texture("Sabonete.png"));
         } else {
-            this.playerProjectile.render(batch,new Texture("SaboneteRosa.png"));
+            this.playerProjectile.render(batch, new Texture("SaboneteRosa.png"));
         }
 
         this.boss.render(batch);
@@ -230,7 +232,7 @@ public class GameScreen extends ScreenAdapter {
         bitmap.draw(batch, "" + (3f - playerProjectile.getDelayShoot() <= 0 ? "Ready!" : Math.ceil(3f - playerProjectile.getDelayShoot()) + " s"), 100, HyperShapes.INSTANCE.getScreenHeight() - 100);
 
         if (this.boss.getStage() == 2) {
-            bitmap.draw(batch, "" + Math.round(boss.getSecondStageTime()) + " s", HyperShapes.INSTANCE.getScreenWidth()/2, HyperShapes.INSTANCE.getScreenHeight() - 100);
+            bitmap.draw(batch, "" + Math.round(boss.getSecondStageTime()) + " s", HyperShapes.INSTANCE.getScreenWidth() / 2, HyperShapes.INSTANCE.getScreenHeight() - 100);
         }
 
         bitmap.draw(batch, "Pontos: " + (int) Math.pow(player.getScore(), HyperShapes.INSTANCE.getDifficulty()), HyperShapes.INSTANCE.getScreenWidth() - 225, HyperShapes.INSTANCE.getScreenHeight() - 100);
@@ -271,6 +273,7 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * Método que retorna o mundo do jogo.
+     *
      * @return world (World)
      */
     public World getWorld() {
@@ -279,6 +282,7 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * Método que retorna o jogador.
+     *
      * @return player (Player)
      */
     public Player getPlayer() {
@@ -287,6 +291,7 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * Método que retorna o projétil do jogador.
+     *
      * @return playerProjectile (PlayerProjectile)
      */
     public PlayerProjectile getPlayerProjectile() {
@@ -295,6 +300,7 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * Método que retorna o chefe do jogo.
+     *
      * @return boss (Boss)
      */
     public Boss getBoss() {
@@ -303,6 +309,7 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * Método que retorna o mundo do jogo.
+     *
      * @return bossProjectiles (lista do tipo BossProjectile)
      */
     public ArrayList<BossProjectile> getBossProjectiles() {
@@ -311,6 +318,7 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * Método que atribui um novo valor a variavel slowEffect.
+     *
      * @param slowEffect (boolean)
      */
     public void setSlowEffect(boolean slowEffect) {
@@ -319,6 +327,7 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * Método que retorna o timeHelper.
+     *
      * @return timeHelper (TimeHelper)
      */
     public TimeHelper getTimeHelper() {
@@ -327,6 +336,7 @@ public class GameScreen extends ScreenAdapter {
 
     /**
      * Método que retorna o mundo do jogo.
+     *
      * @return world (World)
      */
     public ArrayList<BossBar> getBossBars() {

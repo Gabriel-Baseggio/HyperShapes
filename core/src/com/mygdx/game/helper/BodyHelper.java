@@ -13,14 +13,15 @@ public class BodyHelper {
 
     /**
      * Método que cria um corbo no formato de uma caixa, recebendo os valores necessários para isso acontecer.
-     * @param x (float) posição horizontal do corpo
-     * @param y (float) posição vertical do corpo
-     * @param width (float) largura do corpo
-     * @param height (float) altura do corpo
+     *
+     * @param x        (float) posição horizontal do corpo
+     * @param y        (float) posição vertical do corpo
+     * @param width    (float) largura do corpo
+     * @param height   (float) altura do corpo
      * @param isStatic (boolean) booleano que representa se o corpo será do tipo estático (imóvel)
-     * @param density (float) densidade do corpo, auxiliando em cálculos de física
-     * @param world (World) o mundo no qual o corpo será criado
-     * @param type (ContactType) o tipo de contato que o corpo representa
+     * @param density  (float) densidade do corpo, auxiliando em cálculos de física
+     * @param world    (World) o mundo no qual o corpo será criado
+     * @param type     (ContactType) o tipo de contato que o corpo representa
      * @return um corpo em formato de caixa com todos os valores necessários definidos
      */
     public static Body createBox(float x, float y, float width, float height, boolean isStatic, float density, World world, ContactType type) {
@@ -50,12 +51,13 @@ public class BodyHelper {
 
     /**
      * Método para criar uma sensor em formato de caixa
-     * @param x (float) posição horizontal do sensor
-     * @param y (float) posição vertical do sensor
-     * @param width (float) largura do sensor
+     *
+     * @param x      (float) posição horizontal do sensor
+     * @param y      (float) posição vertical do sensor
+     * @param width  (float) largura do sensor
      * @param height (float) altura do sensor
-     * @param world (World) o mundo no qual o sensor será criado
-     * @param type (ContactType) o tipo de contato que o sensor representa
+     * @param world  (World) o mundo no qual o sensor será criado
+     * @param type   (ContactType) o tipo de contato que o sensor representa
      * @return um corpo em formato retangular que também é um sensor, um tipo diferente de corpo
      */
     public static Body createSensorBox(float x, float y, float width, float height, World world, ContactType type) {
@@ -80,13 +82,14 @@ public class BodyHelper {
 
     /**
      * Método paraa criação de corpos em formatos circulares, recebendo um diâmetro em vez de dois valores de comprimento
-     * @param x (float) posição horizontal do corpo
-     * @param y (float) posição vertical do corpo
-     * @param diameter (float) diâmetro do corpo
-     * @param isStatic (boolean) booleano que representa se o corpo será do tipo estático (imóvel)
-     * @param density (float) densidade do corpo, auxiliando em cálculos de física
-     * @param world (World) o mundo no qual o corpo será criado
-     * @param type (ContactType) o tipo de contato que o corpo representa
+     *
+     * @param x         (float) posição horizontal do corpo
+     * @param y         (float) posição vertical do corpo
+     * @param diameter  (float) diâmetro do corpo
+     * @param isStatic  (boolean) booleano que representa se o corpo será do tipo estático (imóvel)
+     * @param density   (float) densidade do corpo, auxiliando em cálculos de física
+     * @param world     (World) o mundo no qual o corpo será criado
+     * @param type      (ContactType) o tipo de contato que o corpo representa
      * @param fixSensor (FixtureDef) o sensor que body terá. Caso nulo, não será um sensor
      * @return um corpo no formato circular
      */
