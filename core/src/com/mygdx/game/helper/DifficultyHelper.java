@@ -11,6 +11,7 @@ public class DifficultyHelper {
 
     /**
      * Método que calcula um novo valor a uma variável, fazendo ela crescer de acordo com a dificuldade, sendo utilizada para números inteiros
+     *
      * @param value (int) representa o valor base de uma variável
      * @return um novo valor que condiz com a dificuldade escolhida
      */
@@ -25,17 +26,18 @@ public class DifficultyHelper {
     /**
      * Parecido com o defineDifficulty que recebe inteiros, este calcula um novo valor, porém ele decrementa.
      * Utilizado principalmete para calcular intervalos
+     *
      * @param value (float) representa o valor base de uma variável
      * @return um novo valor que condiz com a dificuldade escolhida
      */
-    public static float defineDifficulty(float value){
+    public static float defineDifficulty(float value) {
         int difficulty = HyperShapes.INSTANCE.getDifficulty();
 
         float finalResult;
         if (value < 1) {
             finalResult = (float) (Math.pow(value, difficulty));
         } else {
-            finalResult = (float) (Math.pow(value, 1/difficulty));
+            finalResult = (float) (Math.pow(value, 1 / difficulty));
         }
 
         return finalResult;

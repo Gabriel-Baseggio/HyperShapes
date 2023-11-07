@@ -20,6 +20,7 @@ public class GameContactListener implements ContactListener {
 
     /**
      * Construtor da classe para poder setar a variável gameScreen.
+     *
      * @param gameScreen (GameScreen)
      */
     public GameContactListener(GameScreen gameScreen) {
@@ -28,6 +29,7 @@ public class GameContactListener implements ContactListener {
 
     /**
      * Método para fazer verificações de qual colisão ocorreu e como tratá-las quando elas iniciam.
+     *
      * @param contact (Contact) representa o contato ocorrido
      */
     @Override
@@ -114,6 +116,7 @@ public class GameContactListener implements ContactListener {
 
     /**
      * Método parecido com o beginContact, porém ele é chamado quando uma colisão termina.
+     *
      * @param contact (Contact) representa o contato ocorrido
      */
     @Override
@@ -136,7 +139,8 @@ public class GameContactListener implements ContactListener {
 
     /**
      * Método da interface implementada que não foi utilizada durante o projeto.
-     * @param contact (Contact)
+     *
+     * @param contact     (Contact)
      * @param oldManifold (Manifold)
      */
     @Override
@@ -146,6 +150,7 @@ public class GameContactListener implements ContactListener {
 
     /**
      * Método da interface implementada que não foi utilizada durante o projeto.
+     *
      * @param contact (Contact)
      * @param impulse (ContactImpulse)
      */

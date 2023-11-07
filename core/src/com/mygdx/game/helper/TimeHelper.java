@@ -13,6 +13,7 @@ public class TimeHelper {
 
     /**
      * Método que é utilizado para alcançar o encapsulamento da propriedade timeScale, mudando o valor dela conforme o parâmetro.
+     *
      * @param scale (float)
      */
     public void setTimeScale(float scale) {
@@ -21,6 +22,7 @@ public class TimeHelper {
 
     /**
      * Método que é utilizado para retornar o deltaTime vezes o timeScale, permitindo que seja possível criar uma sensação de slow motion.
+     *
      * @return deltaTime (float)
      */
     public float getDeltaTime() {

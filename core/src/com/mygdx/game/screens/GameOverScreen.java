@@ -49,7 +49,8 @@ public class GameOverScreen extends ScreenAdapter {
 
     /**
      * Construtor da classe que atribui os valores inicias para suas variáveis.
-     * @param camera (OrthographicCamera)
+     *
+     * @param camera     (OrthographicCamera)
      * @param gameScreen (GameScreen)
      */
     public GameOverScreen(OrthographicCamera camera, GameScreen gameScreen) {
@@ -83,6 +84,7 @@ public class GameOverScreen extends ScreenAdapter {
 
     /**
      * Método que é chamado a cada frame do jogo, chamando o método update como também fazendo as renderizações na tela.
+     *
      * @param delta (float) o tempo decorrido desde a última atualização
      */
     @Override
@@ -98,7 +100,7 @@ public class GameOverScreen extends ScreenAdapter {
 
         bitmapTitle.draw(batch, "Game Over!", HyperShapes.INSTANCE.getScreenWidth() / 2 - 210, HyperShapes.INSTANCE.getScreenHeight() / 2);
 
-        bitmapTitle.draw(batch, "Seus pontos: " + gameScreen.getPlayer().getScore(), 10, 50 + bitmapTitle.getCapHeight()*2);
+        bitmapTitle.draw(batch, "Seus pontos: " + gameScreen.getPlayer().getScore(), 10, 50 + bitmapTitle.getCapHeight() * 2);
         bitmapTitle.draw(batch, "Highscore: " + HyperShapes.INSTANCE.getHighscore(), 10, 20 + bitmapTitle.getCapHeight());
 
         batch.end();
