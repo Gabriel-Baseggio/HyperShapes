@@ -3,7 +3,7 @@ package com.mygdx.game.entities;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.mygdx.game.GameScreen;
+import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.HyperShapes;
 
 import static com.mygdx.game.helper.BodyHelper.createSensorBox;

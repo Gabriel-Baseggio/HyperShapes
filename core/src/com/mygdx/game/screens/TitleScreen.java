@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.mygdx.game.HyperShapes;
 
 public class TitleScreen extends ScreenAdapter {
 	private OrthographicCamera camera;
@@ -17,6 +18,7 @@ public class TitleScreen extends ScreenAdapter {
 
 	private FreeTypeFontGenerator generator;
     private FreeTypeFontGenerator.FreeTypeFontParameter parameter;
+    private BitmapFont bitmapTitle;
     private BitmapFont bitmap;
 	
 	public TitleScreen(OrthographicCamera camera) {
@@ -25,12 +27,15 @@ public class TitleScreen extends ScreenAdapter {
 
 		this.generator = new FreeTypeFontGenerator(Gdx.files.internal("font.ttf"));
         this.parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        this.parameter.size = 30;
         this.parameter.borderWidth = 1;
-        this.parameter.borderColor = Color.BLACK;
-        this.parameter.color = Color.WHITE;
-        this.bitmap = generator.generateFont(parameter);
-		
+		this.parameter.color = Color.WHITE;
+
+		this.parameter.size = 60;
+		this.bitmapTitle = generator.generateFont(parameter);
+
+		this.parameter.size = 30;
+		this.bitmap = generator.generateFont(parameter);
+
 	}
 	
 	public void update() {
@@ -65,13 +70,13 @@ public class TitleScreen extends ScreenAdapter {
         batch.draw(new Texture("patinho.png"), HyperShapes.INSTANCE.getScreenWidth() / 2 - 96, HyperShapes.INSTANCE.getScreenHeight() / 2, 64 , 64);
         batch.draw(new Texture("patinho.png"), HyperShapes.INSTANCE.getScreenWidth() / 2 - 80 , HyperShapes.INSTANCE.getScreenHeight() / 2 - 200, 128 , 128);
         
-        bitmap.draw(batch, "Hyper Shapes", HyperShapes.INSTANCE.getScreenWidth() / 2, HyperShapes.INSTANCE.getScreenHeight() / 2);
+        bitmapTitle.draw(batch, "Hyper Shapes", HyperShapes.INSTANCE.getScreenWidth() / 2 - 210, HyperShapes.INSTANCE.getScreenHeight() / 2);
 
-        bitmap.draw(batch, "Pressione ESC para sair", 10, HyperShapes.INSTANCE.getScreenHeight() - parameter.size);
+        bitmap.draw(batch, "Pressione ESC para sair", 10, HyperShapes.INSTANCE.getScreenHeight() - bitmap.getCapHeight());
 
-        bitmap.draw(batch, "Pressione 1 para jogar na dificuldade muito fácil", 10, parameter.size*5);
-        bitmap.draw(batch, "Pressione 2 para jogar na dificuldade levemente fácil", 10, parameter.size*3);
-        bitmap.draw(batch, "Pressione 3 para jogar na dificuldade fácil", 10, parameter.size);
+        bitmap.draw(batch, "Pressione 1 para jogar na dificuldade muito fácil", 10, bitmap.getCapHeight()*5);
+        bitmap.draw(batch, "Pressione 2 para jogar na dificuldade levemente fácil", 10, bitmap.getCapHeight()*3);
+        bitmap.draw(batch, "Pressione 3 para jogar na dificuldade fácil", 10, bitmap.getCapHeight());
 
 		batch.end();
 	}
@@ -79,6 +84,7 @@ public class TitleScreen extends ScreenAdapter {
 	@Override
 	public void dispose() {
 		bitmap.dispose();
+		bitmapTitle.dispose();
 		generator.dispose();
 		batch.dispose();
 	}

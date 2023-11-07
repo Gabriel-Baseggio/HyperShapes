@@ -1,8 +1,7 @@
 package com.mygdx.game.helper;
 
 import com.badlogic.gdx.physics.box2d.*;
-import com.mygdx.game.GameScreen;
-import com.mygdx.game.HyperShapes;
+import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.entities.BossBar;
 import com.mygdx.game.entities.BossProjectile;
 
