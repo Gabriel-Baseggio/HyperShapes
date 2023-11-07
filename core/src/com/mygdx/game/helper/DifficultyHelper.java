@@ -2,7 +2,7 @@ package com.mygdx.game.helper;
 
 import com.mygdx.game.HyperShapes;
 
-public abstract class DifficultyHelper {
+public class DifficultyHelper {
 
     // Para aumentar o valor com base no valor inicial
     public static int defineDifficulty(int value) {

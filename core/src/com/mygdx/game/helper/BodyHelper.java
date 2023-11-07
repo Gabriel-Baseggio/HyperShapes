@@ -6,7 +6,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import static com.mygdx.game.helper.Constants.PPM;
 import static com.mygdx.game.helper.ContactType.SENSOR;
 
-public abstract class BodyHelper {
+public class BodyHelper {
 
     public static Body createBox(float x, float y, float width, float height, boolean isStatic, float density, World world, ContactType type) {
         BodyDef bodyDef = new BodyDef();
