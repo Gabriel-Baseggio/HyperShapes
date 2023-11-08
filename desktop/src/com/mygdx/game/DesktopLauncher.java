@@ -17,6 +17,7 @@ public class DesktopLauncher {
         config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
         config.setForegroundFPS(60);
         config.setTitle("HyperShapes");
+        config.setWindowIcon("iconPatinho.png");
         new Lwjgl3Application(new HyperShapes(), config);
     }
 }
