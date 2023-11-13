@@ -229,13 +229,13 @@ public class GameScreen extends ScreenAdapter {
 
         this.boss.render(batch);
 
-        bitmap.draw(batch, "" + (3f - playerProjectile.getDelayShoot() <= 0 ? "Ready!" : Math.ceil(3f - playerProjectile.getDelayShoot()) + " s"), 100, HyperShapes.INSTANCE.getScreenHeight() - 100);
+        bitmap.draw(batch, "Pontos: " + (int) Math.pow(player.getScore(), HyperShapes.INSTANCE.getDifficulty()), 100, HyperShapes.INSTANCE.getScreenHeight() - 100);
 
         if (this.boss.getStage() == 2) {
             bitmap.draw(batch, "" + Math.round(boss.getSecondStageTime()) + " s", HyperShapes.INSTANCE.getScreenWidth() / 2, HyperShapes.INSTANCE.getScreenHeight() - 100);
         }
 
-        bitmap.draw(batch, "Pontos: " + (int) Math.pow(player.getScore(), HyperShapes.INSTANCE.getDifficulty()), HyperShapes.INSTANCE.getScreenWidth() - 225, HyperShapes.INSTANCE.getScreenHeight() - 100);
+        bitmap.draw(batch, "" + (3f - playerProjectile.getDelayShoot() <= 0 ? "Ready!" : Math.ceil(3f - playerProjectile.getDelayShoot()) + " s"), HyperShapes.INSTANCE.getScreenWidth() - 225, HyperShapes.INSTANCE.getScreenHeight() - 100);
 
         batch.end();
 
